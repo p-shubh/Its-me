@@ -15,7 +15,7 @@ export default function Experience() {
         label="Experience"
         title={
           <>
-            Two companies, <em className="text-red">two</em> continents.
+            Two companies, two continents.
           </>
         }
         lede="One through-line: event-driven backends in Go that hold up under concurrent load — designed, shipped and operated."
@@ -30,12 +30,12 @@ export default function Experience() {
           >
             <Reveal className="md:col-span-4">
               <div className="md:sticky md:top-24">
-                <p className="text-lg font-medium">
+                <p className="meta font-medium tabular-nums">
                   {r.start} – <span className={r.current ? "text-red" : ""}>{r.end}</span>
                 </p>
-                <h3 className="display mt-4 text-[clamp(2.75rem,5.5vw,4.75rem)] leading-[0.92]">{r.company}</h3>
-                <p className="mt-4 text-lg">{r.title}</p>
-                <p className="mt-1 text-mute">
+                <h3 className="display mt-3 text-h3">{r.company}</h3>
+                <p className="mt-3 text-lede font-medium">{r.title}</p>
+                <p className="meta mt-1 text-mute">
                   {r.location} · {r.mode}
                 </p>
               </div>
@@ -43,13 +43,13 @@ export default function Experience() {
 
             <div className="md:col-span-8 lg:col-[6/span_7]">
               <Reveal>
-                <p className="display text-[clamp(1.6rem,2.6vw,2.25rem)] leading-[1.15] italic text-pretty">{r.context}</p>
+                <p className="text-lede font-medium text-pretty">{r.context}</p>
               </Reveal>
               <ol className="mt-8">
                 {r.points.map((p, i) => (
                   <Reveal as="li" key={p} className="grid grid-cols-[2.25rem_1fr] gap-x-3 border-t border-rule py-5">
-                    <span className="meta pt-1 text-mute">{String(i + 1).padStart(2, "0")}</span>
-                    <p className="text-[1.0625rem] leading-relaxed text-ink-2 text-pretty">{emphasise(p)}</p>
+                    <span className="meta pt-0.5 text-mute">{String(i + 1).padStart(2, "0")}</span>
+                    <p className="max-w-[44rem] text-ink-2 text-pretty">{emphasise(p)}</p>
                   </Reveal>
                 ))}
               </ol>

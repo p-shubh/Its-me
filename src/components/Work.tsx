@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { atlas, experience, myriadflow, netsepio, trading } from "../data";
 import { AtlasFigure, NetsepioFigure, SotreusFigure, TradingFigure } from "./Figures";
-import { Figure, Reveal, SectionHead, StackLine } from "./ui";
+import { Accent, Figure, Reveal, SectionHead, StackLine } from "./ui";
 
 const sotreus = experience.find((r) => r.subProject)!.subProject!;
 
@@ -31,14 +31,14 @@ function CaseHead({
   return (
     <Reveal className={`grid gap-4 border-t pt-5 grid-cols-1 md:grid-cols-12 md:gap-8 ${night ? "border-paper" : "border-ink"}`}>
       <div className="md:col-span-3">
-        <p className="meta">
+        <p className="meta font-medium">
           <span className={night ? "text-red-bright" : "text-red"}>Case {no}</span>
         </p>
-        <p className={`mt-1 ${night ? "text-night-mute" : "text-ink-2"}`}>{kind}</p>
+        <p className={`meta mt-1 ${night ? "text-night-mute" : "text-ink-2"}`}>{kind}</p>
       </div>
       <div className="md:col-span-9">
-        <h3 className="display text-[clamp(3.5rem,11vw,10rem)] leading-[0.85]">{name}</h3>
-        <p className="display mt-[0.6em] text-[clamp(1.5rem,2.6vw,2.25rem)] italic">{sub}</p>
+        <h3 className="display text-h3">{name}</h3>
+        <p className={`mt-2 text-lede ${night ? "text-night-mute" : "text-ink-2"}`}>{sub}</p>
         {note && <div className="mt-5">{note}</div>}
       </div>
     </Reveal>
@@ -47,7 +47,7 @@ function CaseHead({
 
 function Points({ items, night = false }: { items: string[]; night?: boolean }) {
   return (
-    <ul className={`prose-list space-y-4 text-[1.0625rem] leading-relaxed text-pretty ${night ? "text-paper/85" : "text-ink-2"}`}>
+    <ul className={`prose-list max-w-[40rem] space-y-4 text-pretty ${night ? "text-paper/85" : "text-ink-2"}`}>
       {items.map((p) => (
         <li key={p}>{p}</li>
       ))}
@@ -57,7 +57,7 @@ function Points({ items, night = false }: { items: string[]; night?: boolean }) 
 
 function Label({ children, night = false }: { children: ReactNode; night?: boolean }) {
   return (
-    <h4 className={`mb-4 border-b pb-2 font-medium ${night ? "border-rule-night" : "border-rule"}`}>{children}</h4>
+    <h4 className={`mb-4 border-b pb-2 text-h4 font-semibold ${night ? "border-rule-night" : "border-rule"}`}>{children}</h4>
   );
 }
 
@@ -70,7 +70,7 @@ export default function Work() {
           label="Selected work"
           title={
             <>
-              Five pieces of <em className="text-red">work</em>, read closely.
+              Five pieces of <Accent>work</Accent>, read closely.
             </>
           }
         />
@@ -80,8 +80,8 @@ export default function Work() {
             {index.map((p, i) => (
               <li key={p.id} className="border-b border-rule">
                 <a href={`#${p.id}`} className="group grid grid-cols-[2.5rem_1fr] items-baseline gap-x-4 py-4 sm:grid-cols-[3rem_14rem_1fr_auto]">
-                  <span className="meta text-mute">0{i + 1}</span>
-                  <span className="display text-[1.9rem] leading-none transition-colors group-hover:text-red">{p.name}</span>
+                  <span className="meta text-mute tabular-nums">0{i + 1}</span>
+                  <span className="text-h4 font-semibold transition-colors group-hover:text-red">{p.name}</span>
                   <span className="col-start-2 text-ink-2 sm:col-start-auto">{p.line}</span>
                   <span className="meta col-start-2 text-mute sm:col-start-auto">{p.kind}</span>
                 </a>
@@ -103,11 +103,11 @@ export default function Work() {
 
           <Reveal delay={0.08} className="md:col-span-5 lg:col-span-4">
             <div className="bg-red p-6 text-paper sm:p-8">
-              <p className="text-[clamp(3.5rem,7vw,6rem)] leading-[0.85] font-extrabold tracking-[-0.05em]">1.01M</p>
-              <p className="mt-4 text-lg leading-snug font-medium">
+              <p className="display text-stat tabular-nums">1.01M</p>
+              <p className="mt-4 text-lede font-medium">
                 requests per day of abnormal traffic — 72% of it from a single scraper IP.
               </p>
-              <p className="mt-6 border-t border-paper/40 pt-4 text-[0.95rem] leading-relaxed">
+              <p className="mt-6 border-t border-paper/40 pt-4">
                 Answered with per-IP API rate limiting inside Cloudflare Free-plan limits, validated by load testing.
               </p>
             </div>
@@ -131,10 +131,10 @@ export default function Work() {
             <ol>
               {netsepio.log.map((l, i) => (
                 <Reveal as="li" key={l.text} className="grid grid-cols-[2.5rem_1fr] gap-x-3 border-b border-rule py-6 first:pt-2">
-                  <span className="meta pt-2 text-red">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="meta pt-0.5 font-medium text-red">{String(i + 1).padStart(2, "0")}</span>
                   <div>
-                    <h5 className="display text-[1.75rem] leading-tight">{l.title}</h5>
-                    <p className="mt-2 leading-relaxed text-ink-2 text-pretty">{l.text}</p>
+                    <h5 className="text-h4 font-semibold">{l.title}</h5>
+                    <p className="mt-1.5 text-ink-2 text-pretty">{l.text}</p>
                   </div>
                 </Reveal>
               ))}
@@ -191,7 +191,7 @@ export default function Work() {
               </Reveal>
               <Reveal>
                 <Label night>Recovery</Label>
-                <p className="display text-[clamp(3rem,6vw,5rem)] leading-none">
+                <p className="display text-stat tabular-nums">
                   17 GB <span className="text-red-bright">→</span> 1.1 GB
                 </p>
                 <div className="mt-5">
@@ -218,7 +218,7 @@ export default function Work() {
             </Figure>
           </Reveal>
           <Reveal delay={0.06} className="md:col-span-5 lg:col-[9/span_4]">
-            <p className="display text-[clamp(2.4rem,3.6vw,3.4rem)] leading-none">Sub-millisecond</p>
+            <p className="display text-stat">Sub-millisecond</p>
             <p className="mt-2 text-ink-2">broadcast latency to multiple concurrent clients</p>
             <div className="mt-8">
               <Points items={trading.points} />

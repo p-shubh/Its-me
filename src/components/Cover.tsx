@@ -2,30 +2,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, ArrowDownToLine } from "lucide-react";
 import { education, experience, profile } from "../data";
 import { PubSubFigure } from "./Figures";
-import { Figure, ext, useFitText } from "./ui";
-
-function FitLine({ children, delay }: { children: string; delay: number }) {
-  const reduce = useReducedMotion();
-  const text = children.toUpperCase();
-  const { box, size } = useFitText<HTMLSpanElement>(text, -0.01);
-  return (
-    <span
-      ref={box}
-      aria-hidden
-      className="block overflow-hidden"
-      style={{ fontSize: size ? `${size}px` : "16vw", lineHeight: 0.86, letterSpacing: "-0.01em" }}
-    >
-      <motion.span
-        className="block whitespace-nowrap"
-        initial={reduce ? false : { y: "100%" }}
-        animate={{ y: "0%" }}
-        transition={{ duration: 1, delay, ease: [0.2, 0.75, 0.15, 1] }}
-      >
-        {text}
-      </motion.span>
-    </span>
-  );
-}
+import { Figure, ext } from "./ui";
 
 export default function Cover() {
   const reduce = useReducedMotion();
@@ -43,22 +20,20 @@ export default function Cover() {
     <section id="top" className="wrap pt-20 sm:pt-24">
       <motion.p
         {...fade(0)}
-        className="flex flex-wrap justify-between gap-x-6 gap-y-1 border-b border-ink pb-3 text-[0.95rem]"
+        className="meta flex flex-wrap justify-between gap-x-6 gap-y-1 border-b border-ink pb-3"
       >
         <span className="font-medium">{profile.title}</span>
         <span className="text-ink-2">{profile.focus.join("  ·  ")}</span>
       </motion.p>
 
-      {/* masthead: each line of the name is fitted to run edge to edge */}
-      <h1 className="display mt-6 uppercase sm:mt-8">
-        <span className="sr-only">{profile.name}</span>
-        <FitLine delay={0.1}>Shubham</FitLine>
-        <FitLine delay={0.22}>Prajapati</FitLine>
-      </h1>
+      <motion.h1 {...fade(0.1)} className="display mt-14 text-hero sm:mt-20">
+        {profile.name}
+        <span className="text-red">.</span>
+      </motion.h1>
 
-      <div className="mt-10 grid gap-12 border-t border-ink pt-8 pb-20 sm:mt-14 grid-cols-1 md:grid-cols-12 md:gap-8 lg:pb-28">
+      <div className="mt-12 grid gap-12 border-t border-ink pt-8 pb-20 sm:mt-16 grid-cols-1 md:grid-cols-12 md:gap-8 lg:pb-28">
         <motion.div {...fade(0.5)} className="md:col-span-6 lg:col-span-5">
-          <p className="text-[clamp(1.35rem,2.2vw,1.75rem)] leading-[1.35] font-normal tracking-[-0.01em] text-pretty">
+          <p className="max-w-[30ch] text-standfirst text-pretty">
             I build backend systems in Go that stay reliable under concurrent, high-throughput load — gRPC and REST APIs,
             event-driven pipelines and real-time WebSocket infrastructure, owned from schema to production.
           </p>

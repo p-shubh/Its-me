@@ -52,11 +52,11 @@ export default function Masthead() {
       <div className="wrap flex h-16 items-center justify-between gap-6">
         <a href="#top" className="group flex items-baseline gap-3">
           <span className="font-semibold tracking-tight">{profile.name}</span>
-          <span className="hidden text-sm text-mute lg:inline">Backend Engineer</span>
+          <span className="meta hidden text-mute lg:inline">Backend Engineer</span>
         </a>
 
         <nav aria-label="Primary" className="hidden md:block">
-          <ul className="flex items-center gap-7 text-[0.95rem]">
+          <ul className="flex items-center gap-7 text-[0.9375rem]">
             {sections.map((s) => (
               <li key={s.id}>
                 <a
@@ -117,7 +117,7 @@ export default function Masthead() {
                     onClick={() => setOpen(false)}
                     className="flex items-baseline justify-between py-3"
                   >
-                    <span className="display text-[3.25rem]">{s.label}</span>
+                    <span className="text-[2rem] font-semibold tracking-[-0.02em]">{s.label}</span>
                     <span className="meta text-mute">§ {String(i + 1).padStart(2, "0")}</span>
                   </a>
                 </li>

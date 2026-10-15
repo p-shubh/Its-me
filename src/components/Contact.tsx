@@ -26,27 +26,23 @@ export default function Contact() {
   return (
     <section id="contact" className="bg-red text-paper">
       <div className="wrap py-20 sm:py-28">
-        <Reveal className="flex items-baseline gap-3 border-t border-paper pt-5">
-          <span className="meta">§ 06</span>
+        <Reveal className="meta flex items-baseline gap-3 border-t border-paper pt-5">
+          <span className="font-medium">§ 06</span>
           <span className="font-medium">Contact</span>
         </Reveal>
 
         <Reveal className="mt-10">
-          <h2 className="text-[clamp(3.4rem,11.5vw,11rem)] leading-[0.86] font-extrabold tracking-[-0.055em] text-ink uppercase">
-            Let&rsquo;s build
-            <br />
-            something
-            <br />
-            that stays up.
+          <h2 className="display max-w-[16ch] text-h2 text-ink">
+            Let&rsquo;s build something that <em className="accent !text-paper">stays up</em>.
           </h2>
         </Reveal>
 
         <div className="mt-16 grid gap-12 grid-cols-1 md:grid-cols-12 md:gap-8 lg:mt-24">
           <Reveal className="md:col-span-6">
-            <p className="text-lg">Write directly —</p>
+            <p className="text-lede">Write directly —</p>
             <a
               href={`mailto:${profile.email}`}
-              className="group mt-2 inline-flex max-w-full items-start gap-2 text-[clamp(1.2rem,2.1vw,1.9rem)] leading-tight font-medium [overflow-wrap:anywhere] underline decoration-1 underline-offset-[0.2em]"
+              className="group mt-2 inline-flex max-w-full items-start gap-2 text-[clamp(1.125rem,0.9rem+1.2vw,1.75rem)] leading-snug font-medium [overflow-wrap:anywhere] underline decoration-1 underline-offset-[0.2em]"
             >
               {profile.email}
               <ArrowUpRight className="mt-1 size-[0.9em] shrink-0 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden />
