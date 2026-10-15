@@ -2,6 +2,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, ArrowDownToLine } from "lucide-react";
 import { education, experience, profile } from "../data";
 import { PubSubFigure } from "./Figures";
+import { HeroDeveloper } from "./LineArt";
 import { Figure, ext } from "./ui";
 
 export default function Cover() {
@@ -26,11 +27,17 @@ export default function Cover() {
         <span className="text-ink-2">{profile.focus.join("  ·  ")}</span>
       </motion.p>
 
-      <motion.h1 {...fade(0.1)} className="display mt-12 text-hero font-semibold sm:mt-16">
-        {profile.name}
-      </motion.h1>
+      <div className="mt-10 grid grid-cols-1 items-end gap-6 sm:mt-12 md:grid-cols-12 md:gap-8">
+        <motion.h1 {...fade(0.1)} className="display text-hero font-semibold md:col-span-8">
+          {profile.name}
+        </motion.h1>
+        {/* decorative: the developer at work, drawn on load */}
+        <div className="w-full max-w-[220px] md:col-span-4 md:max-w-[280px] md:justify-self-end">
+          <HeroDeveloper />
+        </div>
+      </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-12 border-t border-ink pt-8 pb-14 sm:mt-12 md:grid-cols-12 md:gap-8 lg:pb-20">
+      <div className="mt-8 grid grid-cols-1 gap-12 border-t border-ink pt-8 pb-14 md:grid-cols-12 md:gap-8 lg:pb-20">
         <motion.div {...fade(0.5)} className="md:col-span-6 lg:col-span-5">
           <p className="max-w-[30ch] text-standfirst text-pretty">
             I build backend systems in Go that stay reliable under concurrent, high-throughput load — gRPC and REST APIs,

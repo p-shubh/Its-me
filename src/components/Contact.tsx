@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { profile } from "../data";
+import { ContactDeveloper } from "./LineArt";
 import { Reveal, SectionHead, ext } from "./ui";
 
 export default function Contact() {
@@ -28,7 +29,7 @@ export default function Contact() {
       <SectionHead no="06" label="Contact" title="Let’s build something that stays up." />
 
       <div className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8 lg:mt-14">
-        <Reveal className="md:col-[4/span_9] lg:col-[4/span_4]">
+        <Reveal className="md:col-[4/span_9] md:row-start-1 lg:col-[4/span_4]">
             <p className="text-ink-2">Write directly —</p>
             <a
               href={`mailto:${profile.email}`}
@@ -51,7 +52,7 @@ export default function Contact() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.06} className="md:col-[4/span_9] lg:col-[8/span_5]">
+          <Reveal delay={0.06} className="md:col-[4/span_9] lg:col-[8/span_5] lg:row-start-1">
             <ul className="border-t border-ink">
               {rows.map((r) => (
                 <li key={r.label} className="border-b border-rule">
@@ -70,6 +71,9 @@ export default function Contact() {
               ))}
             </ul>
           </Reveal>
+        <div className="w-full max-w-[240px] md:col-[1/span_3] md:row-start-1 md:max-w-none md:pr-6 md:row-span-2 lg:row-span-1">
+          <ContactDeveloper />
+        </div>
       </div>
     </section>
   );

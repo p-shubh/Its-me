@@ -1,4 +1,5 @@
 import { evidence, strengths } from "../data";
+import { AboutDeveloper } from "./LineArt";
 import { Reveal, SectionHead } from "./ui";
 
 export default function About() {
@@ -7,7 +8,7 @@ export default function About() {
       <SectionHead no="01" label="About" title="Systems that hold up after launch." />
 
       <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-8 lg:mt-14">
-        <Reveal className="md:col-[4/span_9] lg:col-[4/span_7]">
+        <Reveal className="md:col-[4/span_9] md:row-start-1 lg:col-[4/span_7]">
           <p className="max-w-[30ch] text-standfirst text-pretty">
             Results-driven backend engineer with 3+ years of production experience building high-performance,
             distributed systems in Golang.
@@ -29,6 +30,9 @@ export default function About() {
             </p>
           </div>
         </Reveal>
+        <div className="w-full max-w-[240px] md:col-[1/span_3] md:row-start-1 md:max-w-none md:pr-6 md:pt-2">
+          <AboutDeveloper />
+        </div>
       </div>
 
       {/* evidence: two-column metrics, thin dividers, attribution under each figure */}
