@@ -28,7 +28,7 @@ export default function Stack() {
                   A.{String(i + 1).padStart(2, "0")}
                 </span>
                 <div className="md:col-span-4 lg:col-span-3">
-                  <h3 className="text-h4 font-semibold">{g.label}</h3>
+                  <h3 className="text-h4 font-medium">{g.label}</h3>
                   {g.note && <p className="meta mt-1 text-mute">{g.note}</p>}
                 </div>
                 <p className="col-start-2 mt-2 text-ink-2 md:col-span-7 md:col-start-auto md:mt-0 lg:col-span-8">
@@ -38,7 +38,7 @@ export default function Stack() {
                       <span key={s}>
                         {primary ? (
                           <span className="font-semibold text-ink">
-                            Golang <span className="bg-red px-1.5 py-0.5 text-sm font-medium text-paper">primary</span>
+                            Golang <span className="ml-1 rounded border border-red/40 px-1.5 py-px text-[0.8125rem] font-medium text-red">primary</span>
                           </span>
                         ) : (
                           s

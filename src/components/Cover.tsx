@@ -26,18 +26,17 @@ export default function Cover() {
         <span className="text-ink-2">{profile.focus.join("  ·  ")}</span>
       </motion.p>
 
-      <motion.h1 {...fade(0.1)} className="display mt-14 text-hero sm:mt-20">
+      <motion.h1 {...fade(0.1)} className="display mt-12 text-hero font-semibold sm:mt-16">
         {profile.name}
-        <span className="text-red">.</span>
       </motion.h1>
 
-      <div className="mt-12 grid gap-12 border-t border-ink pt-8 pb-20 sm:mt-16 grid-cols-1 md:grid-cols-12 md:gap-8 lg:pb-28">
+      <div className="mt-10 grid grid-cols-1 gap-12 border-t border-ink pt-8 pb-14 sm:mt-12 md:grid-cols-12 md:gap-8 lg:pb-20">
         <motion.div {...fade(0.5)} className="md:col-span-6 lg:col-span-5">
           <p className="max-w-[30ch] text-standfirst text-pretty">
             I build backend systems in Go that stay reliable under concurrent, high-throughput load — gRPC and REST APIs,
             event-driven pipelines and real-time WebSocket infrastructure, owned from schema to production.
           </p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="mt-8 flex flex-wrap gap-3">
             <a href="#work" className="btn btn-solid">
               Read the case studies <ArrowDown className="size-4" aria-hidden />
             </a>

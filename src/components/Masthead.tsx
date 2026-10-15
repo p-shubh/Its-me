@@ -49,7 +49,7 @@ export default function Masthead() {
         scrolled ? "border-b border-rule" : "border-b border-transparent"
       }`}
     >
-      <div className="wrap flex h-16 items-center justify-between gap-6">
+      <div className="wrap flex h-14 items-center justify-between gap-6">
         <a href="#top" className="group flex items-baseline gap-3">
           <span className="font-semibold tracking-tight">{profile.name}</span>
           <span className="meta hidden text-mute lg:inline">Backend Engineer</span>
@@ -117,8 +117,8 @@ export default function Masthead() {
                     onClick={() => setOpen(false)}
                     className="flex items-baseline justify-between py-3"
                   >
-                    <span className="text-[2rem] font-semibold tracking-[-0.02em]">{s.label}</span>
-                    <span className="meta text-mute">§ {String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-[1.75rem] font-medium tracking-[-0.025em]">{s.label}</span>
+                    <span className="meta text-red tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   </a>
                 </li>
               ))}

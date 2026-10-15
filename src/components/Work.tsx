@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { atlas, experience, myriadflow, netsepio, trading } from "../data";
 import { AtlasFigure, NetsepioFigure, SotreusFigure, TradingFigure } from "./Figures";
-import { Accent, Figure, Reveal, SectionHead, StackLine } from "./ui";
+import { Figure, Reveal, SectionHead, StackLine } from "./ui";
 
 const sotreus = experience.find((r) => r.subProject)!.subProject!;
 
@@ -18,36 +18,34 @@ function CaseHead({
   kind,
   name,
   sub,
-  night = false,
   note,
 }: {
   no: string;
   kind: string;
   name: string;
   sub: string;
-  night?: boolean;
   note?: ReactNode;
 }) {
   return (
-    <Reveal className={`grid gap-4 border-t pt-5 grid-cols-1 md:grid-cols-12 md:gap-8 ${night ? "border-paper" : "border-ink"}`}>
+    <Reveal className="grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
       <div className="md:col-span-3">
         <p className="meta font-medium">
-          <span className={night ? "text-red-bright" : "text-red"}>Case {no}</span>
+          <span className="text-red tabular-nums">Case {no}</span>
         </p>
-        <p className={`meta mt-1 ${night ? "text-night-mute" : "text-ink-2"}`}>{kind}</p>
+        <p className="meta mt-1 text-mute">{kind}</p>
       </div>
       <div className="md:col-span-9">
         <h3 className="display text-h3">{name}</h3>
-        <p className={`mt-2 text-lede ${night ? "text-night-mute" : "text-ink-2"}`}>{sub}</p>
+        <p className="mt-2 text-lede text-ink-2">{sub}</p>
         {note && <div className="mt-5">{note}</div>}
       </div>
     </Reveal>
   );
 }
 
-function Points({ items, night = false }: { items: string[]; night?: boolean }) {
+function Points({ items }: { items: string[] }) {
   return (
-    <ul className={`prose-list max-w-[40rem] space-y-4 text-pretty ${night ? "text-paper/85" : "text-ink-2"}`}>
+    <ul className="prose-list max-w-[40rem] space-y-4 text-ink-2 text-pretty">
       {items.map((p) => (
         <li key={p}>{p}</li>
       ))}
@@ -55,9 +53,9 @@ function Points({ items, night = false }: { items: string[]; night?: boolean }) 
   );
 }
 
-function Label({ children, night = false }: { children: ReactNode; night?: boolean }) {
+function Label({ children }: { children: ReactNode }) {
   return (
-    <h4 className={`mb-4 border-b pb-2 text-h4 font-semibold ${night ? "border-rule-night" : "border-rule"}`}>{children}</h4>
+    <h4 className="mb-4 border-b border-rule pb-2 text-h4 font-medium">{children}</h4>
   );
 }
 
@@ -70,7 +68,7 @@ export default function Work() {
           label="Selected work"
           title={
             <>
-              Five pieces of <Accent>work</Accent>, read closely.
+              Five pieces of work, read closely.
             </>
           }
         />
@@ -81,7 +79,7 @@ export default function Work() {
               <li key={p.id} className="border-b border-rule">
                 <a href={`#${p.id}`} className="group grid grid-cols-[2.5rem_1fr] items-baseline gap-x-4 py-4 sm:grid-cols-[3rem_14rem_1fr_auto]">
                   <span className="meta text-mute tabular-nums">0{i + 1}</span>
-                  <span className="text-h4 font-semibold transition-colors group-hover:text-red">{p.name}</span>
+                  <span className="text-h4 font-medium transition-colors group-hover:text-red">{p.name}</span>
                   <span className="col-start-2 text-ink-2 sm:col-start-auto">{p.line}</span>
                   <span className="meta col-start-2 text-mute sm:col-start-auto">{p.kind}</span>
                 </a>
@@ -102,12 +100,12 @@ export default function Work() {
           </Reveal>
 
           <Reveal delay={0.08} className="md:col-span-5 lg:col-span-4">
-            <div className="bg-red p-6 text-paper sm:p-8">
+            <div className="border-t-2 border-ink bg-paper-2 p-6 sm:p-8">
               <p className="display text-stat tabular-nums">1.01M</p>
               <p className="mt-4 text-lede font-medium">
                 requests per day of abnormal traffic — 72% of it from a single scraper IP.
               </p>
-              <p className="mt-6 border-t border-paper/40 pt-4">
+              <p className="mt-6 border-t border-rule pt-4 text-ink-2">
                 Answered with per-IP API rate limiting inside Cloudflare Free-plan limits, validated by load testing.
               </p>
             </div>
@@ -133,7 +131,7 @@ export default function Work() {
                 <Reveal as="li" key={l.text} className="grid grid-cols-[2.5rem_1fr] gap-x-3 border-b border-rule py-6 first:pt-2">
                   <span className="meta pt-0.5 font-medium text-red">{String(i + 1).padStart(2, "0")}</span>
                   <div>
-                    <h5 className="text-h4 font-semibold">{l.title}</h5>
+                    <h5 className="text-h4 font-medium">{l.title}</h5>
                     <p className="mt-1.5 text-ink-2 text-pretty">{l.text}</p>
                   </div>
                 </Reveal>
@@ -146,18 +144,17 @@ export default function Work() {
         </Reveal>
       </article>
 
-      {/* ── Case 02 · Atlas — the dark spread ─────────────── */}
-      <article id="atlas" className="mt-28 bg-ink py-20 text-paper sm:mt-40 sm:py-28" aria-label={`${atlas.name} case study`}>
+      {/* ── Case 02 · Atlas — set on a neutral band ───────── */}
+      <article id="atlas" className="mt-28 border-y border-rule bg-paper-2 py-20 sm:mt-40 sm:py-28" aria-label={`${atlas.name} case study`}>
         <div className="wrap">
           <CaseHead
             no="02"
             kind={atlas.kind}
             name={atlas.name}
             sub={atlas.subtitle}
-            night
             note={
-              <p className="inline-flex items-center gap-3 text-night-mute">
-                <span className="size-2 shrink-0 bg-red-bright" aria-hidden />
+              <p className="meta inline-flex items-center gap-2.5 text-mute">
+                <span className="size-1.5 shrink-0 rounded-full bg-red" aria-hidden />
                 {atlas.note}
               </p>
             }
@@ -167,7 +164,6 @@ export default function Work() {
             <Reveal className="md:col-span-5">
               <div className="md:sticky md:top-24">
                 <Figure
-                  night
                   no="3"
                   caption="Go agents stream host metrics to the control plane over libp2p; the control plane stores them in PostgreSQL + TimescaleDB and serves the dashboard."
                 >
@@ -178,30 +174,30 @@ export default function Work() {
 
             <div className="space-y-12 md:col-span-7 lg:col-[7/span_6]">
               <Reveal>
-                <Label night>What it is</Label>
-                <Points night items={[atlas.points[0]]} />
+                <Label>What it is</Label>
+                <Points items={[atlas.points[0]]} />
               </Reveal>
               <Reveal>
-                <Label night>Identity and access</Label>
-                <Points night items={[atlas.points[1], atlas.points[2]]} />
+                <Label>Identity and access</Label>
+                <Points items={[atlas.points[1], atlas.points[2]]} />
               </Reveal>
               <Reveal>
-                <Label night>Releases and operations</Label>
-                <Points night items={[atlas.points[3], atlas.points[4]]} />
+                <Label>Releases and operations</Label>
+                <Points items={[atlas.points[3], atlas.points[4]]} />
               </Reveal>
               <Reveal>
-                <Label night>Recovery</Label>
+                <Label>Recovery</Label>
                 <p className="display text-stat tabular-nums">
-                  17 GB <span className="text-red-bright">→</span> 1.1 GB
+                  17 GB <span className="text-mute">→</span> 1.1 GB
                 </p>
                 <div className="mt-5">
-                  <Points night items={[atlas.points[5]]} />
+                  <Points items={[atlas.points[5]]} />
                 </div>
               </Reveal>
             </div>
           </div>
-          <Reveal className="mt-14 border-t border-rule-night pt-5 lg:ml-[calc(25%+0.5rem)]">
-            <StackLine night items={atlas.stack} />
+          <Reveal className="mt-14 border-t border-rule pt-5 lg:ml-[calc(25%+0.5rem)]">
+            <StackLine items={atlas.stack} />
           </Reveal>
         </div>
       </article>
@@ -212,7 +208,7 @@ export default function Work() {
         <div className="mt-12 grid gap-12 grid-cols-1 md:grid-cols-12 md:gap-8">
           <Reveal className="md:col-span-7">
             <Figure no="4" caption={`${trading.tagline}: signals stream in, position P&L is computed per client, updates fan out to concurrent subscribers.`}>
-              <div className="bg-paper-2 p-5 sm:p-8">
+              <div className="border border-rule p-5 sm:p-8">
                 <TradingFigure />
               </div>
             </Figure>

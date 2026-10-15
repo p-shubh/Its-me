@@ -3,7 +3,9 @@ import { useId, type ReactNode } from "react";
 // Blueprint-style figures. Each depicts only what the CV documents for that piece of work.
 // Strokes use currentColor so a figure works on paper and on the dark Atlas spread.
 
-const PAPER = "#f2ede4";
+const PAPER = "#f5f2ec";
+// highlighted nodes are filled with the page's charcoal ink
+const INK = "#171614";
 
 type BoxProps = {
   x: number;
@@ -76,7 +78,7 @@ function Svg({ vb, label, children }: { vb: string; label: string; children: (m:
 const line = { fill: "none", stroke: "currentColor", strokeWidth: 1.25 } as const;
 
 /** Fig. 1 — producer/consumer decoupling through async pub-sub (X-Factor, Lazarus Network). */
-export function PubSubFigure({ accent = "#c2370f" }: { accent?: string }) {
+export function PubSubFigure({ accent = INK }: { accent?: string }) {
   return (
     <Svg vb="0 0 420 290" label="Two producers publish into a pub-sub channel that fans out asynchronously to three consumers">
       {(m) => (
@@ -115,7 +117,6 @@ export function PubSubFigure({ accent = "#c2370f" }: { accent?: string }) {
 
 /** Fig. 2 — Netsepio ecosystem platform: edge protection on Cloudflare in front of a Vultr origin. */
 export function NetsepioFigure() {
-  const red = "#c2370f";
   return (
     <Svg
       vb="0 0 420 470"
@@ -128,7 +129,7 @@ export function NetsepioFigure() {
 
           <Frame x={0} y={96} w={420} h={110} label="Cloudflare" />
           <Box x={18} y={134} w={180} h={54} lines={["per-IP", "rate limit"]} />
-          <Box x={222} y={134} w={180} h={54} lines={["WAF", "IP block list"]} accent={red} />
+          <Box x={222} y={134} w={180} h={54} lines={["WAF", "IP block list"]} accent={INK} />
 
           <Box x={222} y={240} w={180} h={54} lines={["Worker · cron", "Firewall Events API"]} dashed />
           <path {...line} className="flow" d="M108 188 C 108 228, 160 267, 220 267" markerEnd={m} />
@@ -153,7 +154,6 @@ export function NetsepioFigure() {
 
 /** Fig. 3 — Atlas: agents → libp2p → control plane → TimescaleDB → dashboard. */
 export function AtlasFigure() {
-  const red = "#e8542b";
   return (
     <Svg
       vb="0 0 420 380"
@@ -164,7 +164,7 @@ export function AtlasFigure() {
           {[0, 62, 124].map((y) => (
             <Box key={y} x={0} y={y} w={112} h={44} lines={["Go agent"]} />
           ))}
-          <Box x={196} y={52} w={136} h={64} lines={["control", "plane"]} accent={red} />
+          <Box x={196} y={52} w={136} h={64} lines={["control", "plane"]} accent={INK} />
           {[22, 84, 146].map((y) => (
             <path key={y} {...line} className="flow" d={`M112 ${y} C 150 ${y}, 156 84, 194 84`} markerEnd={m} />
           ))}
@@ -194,7 +194,7 @@ export function AtlasFigure() {
                 {r}
               </text>
             ))}
-            <rect x={-4} y={311} width={100} height={22} fill={red} />
+            <rect x={-4} y={311} width={100} height={22} fill={INK} />
             <text x={2} y={326} fill={PAPER}>
               superadmin
             </text>
@@ -216,7 +216,7 @@ export function TradingFigure() {
         <>
           <Box x={0} y={78} w={104} h={56} lines={["market", "signals"]} />
           <path {...line} className="flow" d="M104 106 L148 106" markerEnd={m} />
-          <Box x={150} y={56} w={124} h={100} lines={["WebSocket", "server", "P&L · sessions"]} accent="#c2370f" />
+          <Box x={150} y={56} w={124} h={100} lines={["WebSocket", "server", "P&L · sessions"]} accent={INK} />
           {[8, 62, 116, 170].map((y) => (
             <g key={y}>
               <path {...line} className="flow" d={`M274 106 C 300 106, 300 ${y + 18}, 326 ${y + 18}`} markerEnd={m} />
@@ -245,7 +245,7 @@ export function SotreusFigure() {
           {[0, 146].map((y, i) => (
             <g key={y}>
               <Frame x={170} y={y} w={250} h={124} label={`instance ${i + 1}`} />
-              <Box x={184} y={y + 38} w={102} h={44} lines={["WireGuard"]} size={13} accent="#c2370f" />
+              <Box x={184} y={y + 38} w={102} h={44} lines={["WireGuard"]} size={13} accent={INK} />
               <Box x={304} y={y + 38} w={102} h={44} lines={["PiHole DNS"]} size={13} />
               <line x1={286} y1={y + 60} x2={304} y2={y + 60} stroke="currentColor" />
               <text x={184} y={y + 108} fontSize={11} fill="currentColor" opacity={0.75}>
