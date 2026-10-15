@@ -45,19 +45,27 @@ export function LineArt({
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     setState("armed");
+    let onScreen = false;
+    const sync = () => setLive(onScreen && !document.hidden);
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setState("drawn");
           if (!loop) io.disconnect();
         }
-        if (loop) setLive(entry.isIntersecting);
+        onScreen = entry.isIntersecting;
+        if (loop) sync();
       },
       // start a little before the art is fully on screen, but not while it is still far below
       { rootMargin: "0px 0px -12% 0px", threshold: 0.2 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // loops also pause while the tab is hidden
+    if (loop) document.addEventListener("visibilitychange", sync);
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+    };
   }, [loop]);
 
   return (
@@ -179,39 +187,85 @@ export function Person({ x, y, at = 0, arms }: { x: number; y: number; arms: Rea
 
 /* ── poses ────────────────────────────────────────────────────────────── */
 
-/** Hero — building: seated behind a laptop, forearms tapping. */
+/**
+ * Hero — building. A layered side-view character so the hands and keyboard are visible.
+ * Every moving part is its own group with its own pivot (see the .hero-char rules in index.css):
+ *   .breathe     torso, head and arms rise ~0.7px on a slow breath
+ *   .chest       the torso outline swells slightly from the hips
+ *   .tilt        hover acknowledgment (desktop only)
+ *   .head-idle   occasional small head turns
+ *   .eye         irregular blinks
+ *   .shoulder-*  shoulders follow their arm's typing a little
+ *   .type-*      forearm + hand rotate at the elbow, so hands lift and land on the keyboard
+ * Chair, desk, laptop and plant never move. Loops run only while the hero is visible.
+ */
 export function HeroDeveloper() {
   return (
-    <LineArt viewBox="0 0 320 228" loop>
-      {/* desk */}
-      <S at={0} dur={700} d="M24 172 H296" />
-      <S at={250} dur={350} d="M44 172 V222" />
-      <S at={300} dur={350} d="M276 172 V222" />
+    <LineArt viewBox="0 0 320 228" loop className="hero-char">
+      {/* chair */}
+      <S at={0} dur={500} d="M70 150 C66 128 64 108 68 90 L76 89" />
+      <Box x={64} y={150} w={60} h={7} r={3} at={100} dur={400} />
+      <S at={250} dur={300} d="M94 157 V196" />
+      <S at={350} dur={350} d="M70 206 L94 196 L118 206" />
+      <Dot cx={70} cy={209} r={2} accent={false} at={600} />
+      <Dot cx={118} cy={209} r={2} accent={false} at={650} />
 
-      <g transform="translate(160 56)">
-        <Head at={200} />
-        <S at={420} dur={500} d="M-24 28 C-18 21 18 21 24 28" />
-        <HoodieTop at={480} />
-        {/* upper arms */}
-        <S at={620} dur={450} d="M-24 29 C-30 40 -34 56 -35 74" />
-        <S at={660} dur={450} d="M24 29 C30 40 34 56 35 74" />
-        {/* forearms: the only looping motion, paused when off screen */}
-        <g className="typing">
-          <S at={900} dur={350} d="M-35 74 C-35 88 -34 100 -31 112" />
+      {/* desk, laptop, plant — static */}
+      <S at={150} dur={600} d="M140 144 H304" />
+      <S at={400} dur={300} d="M140 144 V152" />
+      <S at={450} dur={350} d="M288 144 V222" />
+      <Box x={190} y={138} w={70} h={5} r={2} at={500} dur={400} />
+      <S at={650} dur={250} d="M198 140.5 H248" mute />
+      <S at={600} dur={400} d="M256 140 L272 92 L277 93 L261 141 Z" />
+      <S at={700} dur={350} d="M286 144 L284 128 H302 L300 144 Z" accent />
+      <S at={850} dur={300} d="M293 128 C291 116 286 110 281 108" />
+      <S at={900} dur={300} d="M293 128 C295 114 301 108 307 106" />
+      <S at={950} dur={250} d="M293 128 V112" />
+
+      {/* legs — static, seated */}
+      <S at={450} dur={400} d="M126 157 L152 157 L153 202 H166" />
+      <S at={500} dur={400} d="M129 150 L158 151 L161 202 H175" />
+
+      <g className="breathe">
+        {/* far arm, behind the torso */}
+        <g className="shoulder-b">
+          <S at={850} dur={300} d="M110 92 L131 118" />
+          <g className="type-b">
+            <S at={1050} dur={350} d="M131 118 L214 133" />
+            <S at={1300} dur={200} d="M214 133 C218 132 222 133 225 136" />
+          </g>
         </g>
-        <g className="typing typing-b">
-          <S at={940} dur={350} d="M35 74 C35 88 34 100 31 112" />
+
+        {/* torso: filled with paper so it hides the far arm */}
+        <g className="chest">
+          <S at={550} dur={600} fill={PAPER} d="M100 86 C107 80 121 80 128 87 C132 104 132 128 129 152 H98 C95 128 95 104 100 86 Z" />
+          <S at={850} dur={300} d="M107 83 C111 90 118 90 122 84" />
+          <S at={950} dur={200} d="M121 89 V100" />
+        </g>
+
+        {/* head */}
+        <g className="tilt">
+          <g className="head-idle">
+            <S at={600} dur={300} d="M113 75 V82" />
+            <circle cx={114} cy={62} r={13} fill={PAPER} pathLength={1} className="d" style={timing({ at: 650, dur: 500 })} />
+            <S at={800} dur={400} d="M101 61 C99 48 110 44 119 46 C124 47 127 50 127 53" />
+            <S at={950} dur={200} d="M127 60 L130 65 L127 66" />
+            <S at={1000} dur={200} d="M110 59 C107 59 107 65 110 65" />
+            <g className="eye">
+              <Dot cx={121.5} cy={61} r={1.4} accent={false} at={1100} />
+            </g>
+          </g>
+        </g>
+
+        {/* near arm, in front of the torso */}
+        <g className="shoulder-a">
+          <S at={900} dur={300} d="M117 93 L141 121" />
+          <g className="type-a">
+            <S at={1100} dur={350} d="M141 121 L200 135" />
+            <S at={1350} dur={200} d="M200 135 C204 133 209 134 213 137" />
+          </g>
         </g>
       </g>
-
-      {/* laptop, seen from behind; drawn last so it sits in front of the hands */}
-      <Box x={128} y={116} w={64} h={52} r={4} at={1000} dur={600} />
-      <S at={1150} dur={450} d="M114 170 H206" />
-      <Dot cx={160} cy={142} at={1500} />
-
-      {/* mug */}
-      <S at={1250} dur={450} d="M232 148 V170 H252 V148" />
-      <S at={1450} dur={300} d="M252 153 C261 153 261 165 252 165" />
     </LineArt>
   );
 }
