@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { atlas, myriadflow, netsepio, sotreusCase, trading } from "../data";
-import { AtlasFigure, NetsepioFigure, TradingFigure } from "./Figures";
+import AtlasCase from "./AtlasCase";
+import { NetsepioFigure, TradingFigure } from "./Figures";
 import { ProjectDeveloper } from "./LineArt";
 import SotreusCase from "./SotreusCase";
 import { Figure, Reveal, SectionHead, StackLine } from "./ui";
@@ -149,9 +150,9 @@ export default function Work() {
         </Reveal>
       </article>
 
-      {/* ── Case 02 · Atlas — set on a neutral band ───────── */}
-      <article id="atlas" className="mt-28 border-y border-rule bg-paper-2 py-20 sm:mt-40 sm:py-28" aria-label={`${atlas.name} case study`}>
-        <div className="wrap">
+      {/* ── Case 02 · Atlas — architecture-first case study ── */}
+      <AtlasCase
+        head={
           <CaseHead
             no="02"
             kind={atlas.kind}
@@ -164,48 +165,8 @@ export default function Work() {
               </p>
             }
           />
-
-          <div className="mt-14 grid gap-14 grid-cols-1 md:grid-cols-12 md:gap-8 lg:mt-20">
-            <Reveal className="md:col-span-5">
-              <div className="md:sticky md:top-24">
-                <Figure
-                  no="3"
-                  caption="Go agents stream host metrics to the control plane over libp2p; the control plane stores them in PostgreSQL + TimescaleDB and serves the dashboard."
-                >
-                  <AtlasFigure />
-                </Figure>
-              </div>
-            </Reveal>
-
-            <div className="space-y-12 md:col-span-7 lg:col-[7/span_6]">
-              <Reveal>
-                <Label>What it is</Label>
-                <Points items={[atlas.points[0]]} />
-              </Reveal>
-              <Reveal>
-                <Label>Identity and access</Label>
-                <Points items={[atlas.points[1], atlas.points[2]]} />
-              </Reveal>
-              <Reveal>
-                <Label>Releases and operations</Label>
-                <Points items={[atlas.points[3], atlas.points[4]]} />
-              </Reveal>
-              <Reveal>
-                <Label>Recovery</Label>
-                <p className="display text-stat tabular-nums">
-                  17 GB <span className="text-mute">→</span> 1.1 GB
-                </p>
-                <div className="mt-5">
-                  <Points items={[atlas.points[5]]} />
-                </div>
-              </Reveal>
-            </div>
-          </div>
-          <Reveal className="mt-14 border-t border-rule pt-5 lg:ml-[calc(25%+0.5rem)]">
-            <StackLine items={atlas.stack} />
-          </Reveal>
-        </div>
-      </article>
+        }
+      />
 
       {/* ── Case 03 · Trading calculator ─────────────────── */}
       <article id="trading" className="wrap mt-28 sm:mt-40" aria-label={`${trading.name} case study`}>

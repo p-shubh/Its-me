@@ -23,11 +23,14 @@ const useIsoLayoutEffect = typeof window === "undefined" ? useEffect : useLayout
 export function LineArt({
   viewBox,
   loop = false,
+  label,
   className = "",
   children,
 }: {
   viewBox: string;
   loop?: boolean;
+  /** A meaningful drawing (e.g. an architecture diagram) gets a label; decorative art stays hidden. */
+  label?: string;
   className?: string;
   children: ReactNode;
 }) {
@@ -69,7 +72,7 @@ export function LineArt({
       strokeWidth={1.5}
       strokeLinecap="round"
       strokeLinejoin="round"
-      aria-hidden="true"
+      {...(label ? { role: "img", "aria-label": label } : { "aria-hidden": true })}
       focusable="false"
     >
       {children}
@@ -80,10 +83,10 @@ export function LineArt({
 /* ── drawing primitives ───────────────────────────────────────────────── */
 
 type Timing = { at?: number; dur?: number };
-const timing = ({ at = 0, dur = 600 }: Timing) => ({ "--d": `${at}ms`, "--t": `${dur}ms` }) as CSSProperties;
+export const timing = ({ at = 0, dur = 600 }: Timing) => ({ "--d": `${at}ms`, "--t": `${dur}ms` }) as CSSProperties;
 
 /** A stroke that draws itself. */
-function S({ at, dur, accent, mute, ...p }: SVGProps<SVGPathElement> & Timing & { accent?: boolean; mute?: boolean }) {
+export function S({ at, dur, accent, mute, ...p }: SVGProps<SVGPathElement> & Timing & { accent?: boolean; mute?: boolean }) {
   return (
     <path
       pathLength={1}
@@ -96,7 +99,7 @@ function S({ at, dur, accent, mute, ...p }: SVGProps<SVGPathElement> & Timing & 
 }
 
 /** A rounded box that draws its outline; filled with paper so it masks what sits behind it. */
-function Box({ x, y, w, h, r = 5, at, dur, accent }: { x: number; y: number; w: number; h: number; r?: number; accent?: boolean } & Timing) {
+export function Box({ x, y, w, h, r = 5, at, dur, accent }: { x: number; y: number; w: number; h: number; r?: number; accent?: boolean } & Timing) {
   return (
     <rect
       x={x}
@@ -114,8 +117,26 @@ function Box({ x, y, w, h, r = 5, at, dur, accent }: { x: number; y: number; w: 
 }
 
 /** A small filled detail that fades in rather than draws. */
-function Dot({ cx, cy, r = 2.5, at = 0, accent = true }: { cx: number; cy: number; r?: number; accent?: boolean } & Timing) {
+export function Dot({ cx, cy, r = 2.5, at = 0, accent = true }: { cx: number; cy: number; r?: number; accent?: boolean } & Timing) {
   return <circle cx={cx} cy={cy} r={r} fill={accent ? RED : INK} stroke="none" className="f" style={timing({ at })} />;
+}
+
+/** Diagram text that fades in with its shape. */
+export function T({
+  at = 0,
+  size = 13,
+  weight = 400,
+  tone = "ink",
+  children,
+  ...p
+}: Omit<SVGProps<SVGTextElement>, "fill" | "fontSize" | "fontWeight"> &
+  Timing & { size?: number; weight?: number; tone?: "ink" | "mute" | "red" | "paper" }) {
+  const fill = { ink: INK, mute: "#66615a", red: RED, paper: PAPER }[tone];
+  return (
+    <text className="f" style={timing({ at })} fontSize={size} fontWeight={weight} fill={fill} stroke="none" {...p}>
+      {children}
+    </text>
+  );
 }
 
 /* ── the character ────────────────────────────────────────────────────── */
@@ -142,7 +163,7 @@ function HoodieTop({ at = 0 }: Timing) {
 }
 
 /** Standing figure; arms are pose-specific and passed in. */
-function Person({ x, y, at = 0, arms }: { x: number; y: number; arms: ReactNode } & Timing) {
+export function Person({ x, y, at = 0, arms }: { x: number; y: number; arms: ReactNode } & Timing) {
   return (
     <g transform={`translate(${x} ${y})`}>
       <Head at={at} />

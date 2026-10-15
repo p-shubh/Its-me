@@ -152,59 +152,6 @@ export function NetsepioFigure() {
   );
 }
 
-/** Fig. 3 — Atlas: agents → libp2p → control plane → TimescaleDB → dashboard. */
-export function AtlasFigure() {
-  return (
-    <Svg
-      vb="0 0 420 380"
-      label="Three Go agents stream host metrics over libp2p with Peer ID mutual authentication to a control plane, which stores them in PostgreSQL plus TimescaleDB and serves a React TypeScript dashboard"
-    >
-      {(m) => (
-        <>
-          {[0, 62, 124].map((y) => (
-            <Box key={y} x={0} y={y} w={112} h={44} lines={["Go agent"]} />
-          ))}
-          <Box x={196} y={52} w={136} h={64} lines={["control", "plane"]} accent={INK} />
-          {[22, 84, 146].map((y) => (
-            <path key={y} {...line} className="flow" d={`M112 ${y} C 150 ${y}, 156 84, 194 84`} markerEnd={m} />
-          ))}
-          <text x={0} y={198} fontSize={12} fill="currentColor" opacity={0.8}>
-            libp2p · Peer ID mutual auth
-          </text>
-
-          <path {...line} d="M264 116 L264 214" markerEnd={m} />
-          <Box x={196} y={218} w={136} h={56} lines={["PostgreSQL", "+ TimescaleDB"]} />
-          <path {...line} d="M264 274 L264 318" markerEnd={m} />
-          <Box x={196} y={322} w={136} h={56} lines={["React / TS", "dashboard"]} />
-
-          {/* side annotations */}
-          <g fontSize={12} fill="currentColor">
-            <line x1={332} y1={84} x2={350} y2={84} stroke="currentColor" />
-            <text x={354} y={80}>per-env</text>
-            <text x={354} y={95}>allowlist</text>
-            <line x1={332} y1={246} x2={350} y2={246} stroke="currentColor" />
-            <text x={354} y={242}>17 GB</text>
-            <text x={354} y={257}>→ 1.1 GB</text>
-          </g>
-
-          <g fontSize={12} fill="currentColor">
-            <text x={0} y={244} opacity={0.75}>roles</text>
-            {["viewer", "operator", "admin"].map((r, i) => (
-              <text key={r} x={0} y={266 + i * 18}>
-                {r}
-              </text>
-            ))}
-            <rect x={-4} y={311} width={100} height={22} fill={INK} />
-            <text x={2} y={326} fill={PAPER}>
-              superadmin
-            </text>
-          </g>
-        </>
-      )}
-    </Svg>
-  );
-}
-
 /** Fig. 4 — trading calculator: signals in, P&L computed, broadcast out. */
 export function TradingFigure() {
   return (

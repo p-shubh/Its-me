@@ -170,8 +170,10 @@
   stroke-dasharray: 1;
   stroke-dashoffset: 0;
 }
+/* hidden strokes are also transparent: a zero-length dash with round caps would show as a dot */
 .art[data-art="armed"] .d {
   stroke-dashoffset: 1;
+  stroke-opacity: 0;
 }
 .art[data-art="armed"] .f {
   opacity: 0;
@@ -185,9 +187,14 @@
 @keyframes art-draw {
   from {
     stroke-dashoffset: 1;
+    stroke-opacity: 0;
+  }
+  2% {
+    stroke-opacity: 1;
   }
   to {
     stroke-dashoffset: 0;
+    stroke-opacity: 1;
   }
 }
 @keyframes art-fade {

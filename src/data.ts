@@ -391,3 +391,57 @@ export const sotreusCase = {
   sourceNote:
     "No repository is linked: the current NetSepio/sotreus repository is a newer Android situational-awareness application, not the VPN implementation described here.",
 };
+
+// ── Atlas overview ────────────────────────────────────────────────────────────
+// From the Atlas project overview. The CV bullets above (atlas.points) stay as the record of the engineering work.
+export const atlasOverview = {
+  intro:
+    "Atlas is a fleet observability platform, built end to end and deployed to monitor a live server fleet. Lightweight Go agents report from each Linux server to a central Atlas server; history lands in TimescaleDB; a web dashboard shows each signed-in user only the servers and pages they are allowed to see.",
+  problem:
+    "The problem: knowing what is happening on every server — resources, containers, services, ports and scheduled jobs — in one place, without logging into each machine, and without giving every user access to everything.",
+  schedule: [
+    { every: "~15 s", what: "Resource measurements" },
+    { every: "~60 s", what: "Fuller snapshot: processes, services, ports and scheduled jobs" },
+  ],
+  retention: [
+    { what: "Detailed measurements", keep: "30 days" },
+    { what: "Summarized history", keep: "Retained longer" },
+  ],
+  connectivity: [
+    {
+      name: "libp2p",
+      kind: "Primary",
+      text: "Each agent keeps a persistent identity that an Atlas administrator approves; the server checks it against the approved agents before accepting reports.",
+    },
+    {
+      name: "HTTPS",
+      kind: "Alternative",
+      text: "The agent enrolls once with a one-time token, then connects with certificate-based authentication.",
+    },
+  ],
+  lifecycle: [
+    { step: "Install", text: "Install atlas-agent on the Linux server." },
+    { step: "Enroll", text: "Connect over libp2p, or enroll over HTTPS with a one-time token." },
+    { step: "Approve", text: "An administrator approves the agent identity, where applicable." },
+    { step: "Verify", text: "Confirm the agent can reach the Atlas server." },
+    { step: "Receive", text: "Measurements and snapshots arrive on schedule." },
+    { step: "Inspect", text: "Signed-in users review the data through authorized dashboard pages." },
+  ],
+  observability: [
+    "Node health and status",
+    "CPU, memory, disk and network usage",
+    "Docker containers and their logs",
+    "System services and processes",
+    "Open ports and scheduled jobs",
+    "Disk and inode monitoring",
+  ],
+  attention: [
+    "Stale or down servers",
+    "Failed services",
+    "Unhealthy containers",
+    "Disk pressure",
+    "Certificate expiry",
+    "Zombie processes",
+  ],
+  roles: ["viewer", "operator", "admin", "superadmin"],
+};
