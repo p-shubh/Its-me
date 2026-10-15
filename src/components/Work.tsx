@@ -1,15 +1,14 @@
 import type { ReactNode } from "react";
-import { atlas, experience, myriadflow, netsepio, trading } from "../data";
-import { AtlasFigure, NetsepioFigure, SotreusFigure, TradingFigure } from "./Figures";
+import { atlas, myriadflow, netsepio, sotreusCase, trading } from "../data";
+import { AtlasFigure, NetsepioFigure, TradingFigure } from "./Figures";
+import SotreusCase from "./SotreusCase";
 import { Figure, Reveal, SectionHead, StackLine } from "./ui";
-
-const sotreus = experience.find((r) => r.subProject)!.subProject!;
 
 const index = [
   { id: "netsepio", name: netsepio.name, kind: netsepio.kind, line: "Peer-to-peer DePIN contribution and production edge security" },
   { id: "atlas", name: atlas.name, kind: atlas.kind, line: "Fleet observability over libp2p, end to end" },
   { id: "trading", name: trading.name, kind: trading.kind, line: "Live signal streaming and P&L over WebSocket" },
-  { id: "sotreus", name: "Sotreus", kind: "Lazarus Network", line: "Multi-instance WireGuard VPN orchestration" },
+  { id: "sotreus", name: "Sotreus", kind: "Lazarus Network", line: "Self-hosted, operator-managed VPN infrastructure" },
   { id: "myriadflow", name: myriadflow.name, kind: myriadflow.kind, line: "Event-driven NFT marketplace backend" },
 ];
 
@@ -226,29 +225,17 @@ export default function Work() {
         </div>
       </article>
 
-      {/* ── Case 04 · Sotreus ─────────────────────────────── */}
-      <article id="sotreus" className="wrap mt-28 sm:mt-40" aria-label="Sotreus case study">
-        <CaseHead
-          no="04"
-          kind={`Built at ${sotreus.org}`}
-          name="Sotreus"
-          sub="Decentralized VPN Infrastructure"
-          note={<p className="text-ink-2">{sotreus.tagline}</p>}
-        />
-        <div className="mt-12 grid gap-12 grid-cols-1 md:grid-cols-12 md:gap-8">
-          <Reveal className="md:col-span-6 lg:col-[4/span_5]">
-            <Points items={sotreus.points} />
-            <div className="mt-8 border-t border-rule pt-5">
-              <StackLine items={sotreus.stack} />
-            </div>
-          </Reveal>
-          <Reveal delay={0.06} className="md:col-span-6 lg:col-[9/span_4]">
-            <Figure no="5" caption="An authenticated API provisions isolated VPN + DNS-firewall pairs, each with its own port and volume.">
-              <SotreusFigure />
-            </Figure>
-          </Reveal>
-        </div>
-      </article>
+      {/* ── Case 04 · Sotreus — see SotreusCase for the evidence-labelled case study ── */}
+      <SotreusCase
+        head={
+          <CaseHead
+            no="04"
+            kind={`${sotreusCase.org} · ${sotreusCase.period}`}
+            name={sotreusCase.name}
+            sub={sotreusCase.subtitle}
+          />
+        }
+      />
 
       {/* ── Case 05 · MyriadFlow ─────────────────────────── */}
       <article id="myriadflow" className="wrap mt-28 sm:mt-40" aria-label={`${myriadflow.name} case study`}>

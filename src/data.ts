@@ -315,3 +315,79 @@ export const evidence = [
     anchor: "#trading",
   },
 ];
+
+// ── Sotreus case study ────────────────────────────────────────────────────────
+// Two sources, kept apart on purpose:
+//   • the supplied Sotreus research notes (public documentation of the VPN-era project)
+//   • Shubham's CV (what he built at Lazarus Network)
+// Every claim carries one of these confidence labels.
+export type Evidence = "documented" | "likely" | "unverified" | "cv";
+
+export const evidenceLabels: Record<Evidence, { label: string; meaning: string }> = {
+  documented: { label: "Documented", meaning: "Explicitly supported by the project research." },
+  likely: { label: "Likely", meaning: "Strong architectural inference from standard VPN and DNS-firewall patterns." },
+  unverified: { label: "Unverified", meaning: "Plausible implementation detail that still needs source confirmation." },
+  cv: { label: "Confirmed by CV", meaning: "Stated in Shubham's CV; not shown in the public documentation." },
+};
+
+export const sotreusCase = {
+  name: "Sotreus",
+  subtitle: "Self-Hosted VPN Infrastructure",
+  org: "Lazarus Network",
+  period: "Mar 2022 – Mar 2023",
+  summary:
+    "A self-hosted, dedicated VPN project associated with The Lazarus Network / NetSepio. A single Sotreus deployment is controlled by one operator — it is not decentralized by itself.",
+  capabilities: [
+    "Client and server management.",
+    "REST and gRPC APIs.",
+    "API documentation served at /docs, plus a Postman collection.",
+    "Email delivery of VPN configuration to clients.",
+    "DNS firewall integration with AdGuard or Pi-hole, run as Docker Compose services.",
+  ],
+  steps: [
+    {
+      title: "Peer creation",
+      text: "An administrator adds a client through the API.",
+      evidence: "documented" as Evidence,
+    },
+    {
+      title: "Key and configuration generation",
+      text: "A key pair, a private tunnel IP and a peer entry on the wg0 interface are generated for the client.",
+      evidence: "likely" as Evidence,
+      note: "The CV confirms WireGuard interface management with wgctrl. Key handling, IP allocation and the wg0 interface name are not documented.",
+    },
+    {
+      title: "Configuration delivery",
+      text: "The VPN configuration is emailed to the client.",
+      evidence: "documented" as Evidence,
+    },
+    {
+      title: "Tunnel establishment",
+      text: "The client performs a WireGuard handshake over UDP and an encrypted tunnel is set up.",
+      evidence: "likely" as Evidence,
+      note: "WireGuard is confirmed by the CV; the handshake and transport follow standard WireGuard behaviour rather than Sotreus documentation.",
+    },
+    {
+      title: "Traffic filtering and egress",
+      text: "DNS queries pass through the AdGuard or Pi-hole DNS firewall, and traffic exits to the internet.",
+      evidence: "likely" as Evidence,
+      note: "The DNS firewall is documented. The CV confirms iptables NAT rules and DNS interception via Pi-hole; the exact routing path is an inference.",
+    },
+  ],
+  comparison: {
+    sotreus: [
+      "Self-hosted, dedicated VPN building block.",
+      "One deployment is controlled by a single operator.",
+      "The operator controls deployment configuration, keys, logs and egress IP.",
+      "Best described as a private, operator-managed VPN deployment.",
+      "VPN-era documentation may be retired; the current product name should be confirmed with the team.",
+    ],
+    erebrus: [
+      "Decentralized VPN project within the NetSepio ecosystem.",
+      "WireGuard-based, with peer-to-peer routing across a network of nodes.",
+      "Hermes Index is described in the research as rating nodes for routing and rewards.",
+    ],
+  },
+  sourceNote:
+    "No repository is linked: the current NetSepio/sotreus repository is a newer Android situational-awareness application, not the VPN implementation described here.",
+};

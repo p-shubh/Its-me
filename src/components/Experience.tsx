@@ -59,7 +59,7 @@ export default function Experience() {
                   <p className="mt-5 text-ink-2">
                     Also at {r.company}:{" "}
                     <a href="#sotreus" className="ulink font-medium text-ink">
-                      {r.subProject.name}
+                      Sotreus
                     </a>{" "}
                     — case 04 above.
                   </p>

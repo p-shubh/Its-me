@@ -231,32 +231,3 @@ export function TradingFigure() {
     </Svg>
   );
 }
-
-/** Fig. 5 — Sotreus: authenticated API provisioning isolated WireGuard + PiHole instance pairs. */
-export function SotreusFigure() {
-  return (
-    <Svg
-      vb="0 0 420 270"
-      label="A gRPC and REST API with PASETO v4 and Ethereum wallet authentication provisions isolated instances, each pairing a WireGuard VPN with a PiHole DNS firewall"
-    >
-      {(m) => (
-        <>
-          <Box x={0} y={92} w={124} h={86} lines={["gRPC + REST", "PASETO v4", "wallet auth"]} />
-          {[0, 146].map((y, i) => (
-            <g key={y}>
-              <Frame x={170} y={y} w={250} h={124} label={`instance ${i + 1}`} />
-              <Box x={184} y={y + 38} w={102} h={44} lines={["WireGuard"]} size={13} accent={INK} />
-              <Box x={304} y={y + 38} w={102} h={44} lines={["PiHole DNS"]} size={13} />
-              <line x1={286} y1={y + 60} x2={304} y2={y + 60} stroke="currentColor" />
-              <text x={184} y={y + 108} fontSize={11} fill="currentColor" opacity={0.75}>
-                own port · own volume
-              </text>
-            </g>
-          ))}
-          <path {...line} d="M124 120 C 146 120, 146 62, 168 62" markerEnd={m} />
-          <path {...line} d="M124 150 C 146 150, 146 208, 168 208" markerEnd={m} />
-        </>
-      )}
-    </Svg>
-  );
-}
