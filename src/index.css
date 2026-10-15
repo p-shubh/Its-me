@@ -226,6 +226,13 @@
 .char[data-in][data-live] .char-body {
   animation-play-state: running;
 }
+/* hero developer inside the stack diagram: same slow breath */
+.hero-breathe {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: char-breathe 5.2s ease-in-out 1s infinite;
+}
+
 @keyframes char-in {
   from {
     opacity: 0;
