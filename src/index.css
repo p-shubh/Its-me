@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #f2ede4;
+  --color-paper-2: #e8e1d5;
+  --color-ink: #171614;
+  --color-ink-2: #34312c;
+  --color-mute: #66615a;
+  --color-red: #c2370f;
+  --color-red-bright: #e8542b;
+  --color-night-mute: #aaa397;
+  --color-rule: rgb(23 22 20 / 0.16);
+  --color-rule-night: rgb(242 237 228 / 0.18);
+
+  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-paper);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-red);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* faint paper tooth — the page should feel printed, not lit */
+  .paper::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .wrap {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .wrap {
+      padding-inline: 3rem;
+    }
+  }
+
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3.25rem;
+    padding: 0 1.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    border: 1.5px solid var(--color-ink);
+    transition:
+      background 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+  }
+  .btn-solid {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+  .btn-solid:hover {
+    background: var(--color-red);
+    border-color: var(--color-red);
+  }
+  .btn-line:hover {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .ulink {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: currentColor;
+    transition:
+      color 0.2s,
+      text-decoration-color 0.2s;
+  }
+  .ulink:hover {
+    color: var(--color-red);
+  }
+
+  .prose-list > li {
+    position: relative;
+    padding-left: 1.6rem;
+  }
+  .prose-list > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.8em;
+    width: 0.85rem;
+    height: 1.5px;
+    background: currentColor;
+    opacity: 0.55;
+  }
+
+  /* blueprint figures */
+  .fig text {
+    font-family: var(--font-mono);
+  }
+  .flow {
+    stroke-dasharray: 4 6;
+    animation: flow 1.6s linear infinite;
+  }
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}
