@@ -1,5 +1,5 @@
 import { evidence, strengths } from "../data";
-import { AboutDeveloper } from "./LineArt";
+import Character from "./Character";
 import { Reveal, SectionHead } from "./ui";
 
 export default function About() {
@@ -30,8 +30,8 @@ export default function About() {
             </p>
           </div>
         </Reveal>
-        <div className="w-full max-w-[240px] md:col-[1/span_3] md:row-start-1 md:max-w-none md:pr-6 md:pt-2">
-          <AboutDeveloper />
+        <div className="w-full max-w-[130px] md:col-[1/span_3] md:row-start-1 md:max-w-[160px] md:pt-2">
+          <Character pose="thinking" />
         </div>
       </div>
 

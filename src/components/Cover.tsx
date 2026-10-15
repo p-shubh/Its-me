@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, ArrowDownToLine } from "lucide-react";
 import { education, experience, profile } from "../data";
 import { PubSubFigure } from "./Figures";
-import { HeroDeveloper } from "./LineArt";
+import Character from "./Character";
 import { Figure, ext } from "./ui";
 
 export default function Cover() {
@@ -31,9 +31,9 @@ export default function Cover() {
         <motion.h1 {...fade(0.1)} className="display text-hero font-semibold md:col-span-8">
           {profile.name}
         </motion.h1>
-        {/* decorative: the developer at work, drawn on load */}
-        <div className="w-full max-w-[220px] md:col-span-4 md:max-w-[280px] md:justify-self-end">
-          <HeroDeveloper />
+        {/* decorative: Shubham at work */}
+        <div className="w-full max-w-[260px] md:col-span-4 md:max-w-[340px] md:justify-self-end">
+          <Character pose="typing" eager />
         </div>
       </div>
 

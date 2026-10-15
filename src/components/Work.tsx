@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { atlas, myriadflow, netsepio, sotreusCase, trading } from "../data";
 import AtlasCase from "./AtlasCase";
 import { NetsepioFigure, TradingFigure } from "./Figures";
-import { ProjectDeveloper } from "./LineArt";
+import Character from "./Character";
 import SotreusCase from "./SotreusCase";
 import { Figure, Reveal, SectionHead, StackLine } from "./ui";
 
@@ -89,8 +89,8 @@ export default function Work() {
             ))}
           </ol>
         </Reveal>
-        <div className="w-full max-w-[240px] md:col-[1/span_3] md:row-start-1 md:max-w-none md:pr-6">
-          <ProjectDeveloper />
+        <div className="w-full max-w-[260px] md:col-[1/span_3] md:row-start-1 md:max-w-none md:pr-6">
+          <Character pose="explaining" />
         </div>
         </div>
       </div>

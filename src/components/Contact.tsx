@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { profile } from "../data";
-import { ContactDeveloper } from "./LineArt";
+import Character from "./Character";
 import { Reveal, SectionHead, ext } from "./ui";
 
 export default function Contact() {
@@ -71,8 +71,8 @@ export default function Contact() {
               ))}
             </ul>
           </Reveal>
-        <div className="w-full max-w-[240px] md:col-[1/span_3] md:row-start-1 md:max-w-none md:pr-6 md:row-span-2 lg:row-span-1">
-          <ContactDeveloper />
+        <div className="w-full max-w-[150px] md:col-[1/span_3] md:row-start-1 md:max-w-[180px] md:row-span-2 lg:row-span-1">
+          <Character pose="cheering" />
         </div>
       </div>
     </section>
