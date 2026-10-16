@@ -41,10 +41,10 @@ export default function Cover() {
               <span className="size-1.5 rounded-full bg-red" aria-hidden />
               {profile.title}
             </span>
-            <span className="flex items-center gap-2">
+            {/* <span className="flex items-center gap-2">
               <span className="size-1.5 rounded-full bg-red" aria-hidden />
               Golang developer
-            </span>
+            </span> */}
           </motion.p>
 
           <motion.h1
