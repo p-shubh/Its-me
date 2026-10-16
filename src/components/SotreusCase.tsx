@@ -210,7 +210,7 @@ export default function SotreusCase({ head }: { head: React.ReactNode }) {
       {/* architecture */}
       <Reveal className="mt-14">
         <Figure
-          no="5"
+          no="4"
           caption="Sotreus components and connections. Line and border style follow the evidence legend; heavier borders mark parts confirmed by the CV."
         >
           <div className="border border-rule bg-paper p-4 sm:p-8">

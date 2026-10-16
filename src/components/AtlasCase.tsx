@@ -493,7 +493,7 @@ export default function AtlasCase({ head: caseHead }: { head: ReactNode }) {
         {/* the centrepiece */}
         <Reveal className="mt-14">
           <Figure
-            no="3"
+            no="2"
             caption="Atlas architecture. Server names are illustrative, not the real deployment. Agent identity (libp2p path) and user sign-in are separate checks; terracotta marks the primary agent path and the authorized flow into the dashboard."
           >
             <div className="border border-rule bg-paper px-2 py-4 sm:p-8 lg:p-10">

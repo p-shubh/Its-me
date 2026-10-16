@@ -122,7 +122,7 @@ export default function Work() {
           <Reveal className="md:col-span-5">
             <div className="md:sticky md:top-24">
               <Figure
-                no="2"
+                no="1"
                 caption="The NetSepio ecosystem platform as operated: Cloudflare at the edge, a cron Worker feeding the WAF block list, and a Vultr origin."
               >
                 <NetsepioFigure />
@@ -173,7 +173,7 @@ export default function Work() {
         <CaseHead no="03" kind={trading.kind} name={trading.name} sub={trading.subtitle} />
         <div className="mt-12 grid gap-12 grid-cols-1 md:grid-cols-12 md:gap-8">
           <Reveal className="md:col-span-7">
-            <Figure no="4" caption={`${trading.tagline}: signals stream in, position P&L is computed per client, updates fan out to concurrent subscribers.`}>
+            <Figure no="3" caption={`${trading.tagline}: signals stream in, position P&L is computed per client, updates fan out to concurrent subscribers.`}>
               <div className="border border-rule p-5 sm:p-8">
                 <TradingFigure />
               </div>

@@ -1,9 +1,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDownToLine, ArrowRight, Mail } from "lucide-react";
 import { education, experience, profile } from "../data";
-import { PubSubFigure } from "./Figures";
 import HeroStack from "./HeroStack";
-import { Figure, ext } from "./ui";
+import { ext } from "./ui";
 
 function GitHubMark() {
   return (
@@ -105,9 +104,9 @@ export default function Cover() {
         </motion.div>
       </div>
 
-      {/* facts and Fig. 1 */}
+      {/* facts */}
       <div className="mt-14 grid grid-cols-1 gap-12 border-t border-ink pt-8 pb-14 md:grid-cols-12 md:gap-8 lg:pb-20">
-        <dl className="grid content-start gap-6 sm:grid-cols-2 md:col-span-7">
+        <dl className="grid content-start gap-6 sm:grid-cols-2 md:col-span-12 lg:grid-cols-4">
           <div>
             <dt className="meta text-mute">Currently</dt>
             <dd className="mt-1.5">
@@ -139,16 +138,6 @@ export default function Cover() {
           </div>
         </dl>
 
-        <div className="md:col-span-5">
-          <Figure
-            no="1"
-            caption="Async pub-sub, producers decoupled from consumers — the pattern behind real-time task-status propagation at Intellixente and ticketing, streaming and NFT-minting flows at Lazarus Network."
-          >
-            <div className="mx-auto max-w-[26rem]">
-              <PubSubFigure />
-            </div>
-          </Figure>
-        </div>
       </div>
     </section>
   );
