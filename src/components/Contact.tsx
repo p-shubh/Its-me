@@ -26,7 +26,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="wrap pt-8 pb-24 sm:pb-32">
-      <SectionHead no="06" label="Contact" title="Let’s build something that stays up." />
+      <SectionHead no="07" label="Contact" title="Let’s build something that stays up." />
 
       <div className="mt-10 grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8 lg:mt-14">
         <Reveal className="md:col-[4/span_9] md:row-start-1 lg:col-[4/span_4]">

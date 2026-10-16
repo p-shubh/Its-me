@@ -5,6 +5,7 @@ import Education from "./components/Education";
 import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Masthead from "./components/Masthead";
+import Security from "./components/Security";
 import Stack from "./components/Stack";
 import Work from "./components/Work";
 
@@ -22,6 +23,7 @@ export default function App() {
         <Cover />
         <About />
         <Work />
+        <Security />
         <Experience />
         <Stack />
         <Education />

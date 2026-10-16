@@ -7,7 +7,7 @@ export default function Stack() {
     <section id="stack" className="bg-paper-2 py-24 sm:py-36">
       <div className="wrap">
         <SectionHead
-          no="04"
+          no="05"
           label="Technical skills"
           title={
             <>

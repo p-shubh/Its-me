@@ -11,7 +11,7 @@ export default function Experience() {
   return (
     <section id="experience" className="wrap pt-28 pb-24 sm:pt-40 sm:pb-36">
       <SectionHead
-        no="03"
+        no="04"
         label="Experience"
         title={
           <>

@@ -6,7 +6,7 @@ export default function Education() {
   return (
     <section id="education" className="wrap py-24 sm:py-36">
       <SectionHead
-        no="05"
+        no="06"
         label="Education"
         title={
           <>

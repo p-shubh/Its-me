@@ -5,6 +5,7 @@ import { profile } from "../data";
 export const sections = [
   { id: "about", label: "About" },
   { id: "work", label: "Work" },
+  { id: "security", label: "Security" },
   { id: "experience", label: "Experience" },
   { id: "stack", label: "Stack" },
   { id: "education", label: "Education" },
