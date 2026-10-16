@@ -4,7 +4,8 @@ import { Reveal, SectionHead } from "./ui";
 /*
  * How Shubham approaches request security, as seven layers.
  *
- * Sources: every control without a `source` comes from the CV; the Netsepio code is not in
+ * No company, client or project names appear in this section, by request.
+ * Sources: every control without a `source` comes from the CV; the source code is not in
  * this repository, so nothing beyond the CV is claimed. Items with source "platform" describe
  * the documented default behaviour of Cloudflare, not something the CV states. The token
  * bucket and the request decision are conceptual and labelled as such.
@@ -20,7 +21,7 @@ const whereLabel: Record<Where, string> = {
   ops: "Alongside, out of band",
 };
 
-type Item = { text: string; project: string; source?: "platform" };
+type Item = { text: string; source?: "platform" };
 
 type Layer = {
   name: string;
@@ -40,13 +41,11 @@ const layers: Layer[] = [
     items: [
       {
         text: "Closed a WAF bypass: spoofable Origin-header skip rules replaced with IP-based and secret-header rules for monitoring and mobile clients.",
-        project: "Netsepio",
       },
       {
         text: "A Cloudflare Worker on a cron trigger reads the GraphQL Firewall Events API and adds repeat rate-limit offenders to a WAF-enforced IP block list.",
-        project: "Netsepio",
       },
-      { text: "A request matching a WAF block rule is stopped at the edge with 403 Forbidden by default.", project: "Cloudflare", source: "platform" },
+      { text: "A request matching a WAF block rule is stopped at the edge with 403 Forbidden by default.", source: "platform" },
     ],
   },
   {
@@ -57,11 +56,9 @@ const layers: Layer[] = [
     items: [
       {
         text: "Investigated 1.01M requests per day of abnormal traffic, 72% from a single scraper IP, and deployed per-IP API rate limiting within Cloudflare Free-plan limits, validated by load testing.",
-        project: "Netsepio",
       },
       {
         text: "A request over the limit is answered by Cloudflare — 429 Too Many Requests by default — and does not reach the origin.",
-        project: "Cloudflare",
         source: "platform",
       },
     ],
@@ -73,10 +70,9 @@ const layers: Layer[] = [
     where: "proxy",
     rejects: "Plain HTTP, redirected",
     items: [
-      { text: "SSL/TLS hardening (HSTS, redirect middleware) behind Cloudflare and Traefik.", project: "Intellixente · X-Factor" },
+      { text: "SSL/TLS hardening (HSTS, redirect middleware) behind Cloudflare and Traefik." },
       {
         text: "Cloudflare Access service tokens for monitoring, so Zero Trust no longer silently blocked heartbeats.",
-        project: "Netsepio",
       },
     ],
   },
@@ -86,10 +82,10 @@ const layers: Layer[] = [
     where: "app",
     rejects: "Unknown callers",
     items: [
-      { text: "JWT and PASETO authentication for the REST APIs.", project: "Intellixente · X-Factor" },
-      { text: "OAuth-authenticated REST API.", project: "Lazarus Network" },
-      { text: "PASETO v4 tokens with Ethereum wallet challenge-response.", project: "Sotreus" },
-      { text: "libp2p Peer ID mutual authentication with a per-environment allowlist — for agents, not users.", project: "Atlas" },
+      { text: "JWT and PASETO authentication for the REST APIs." },
+      { text: "OAuth-authenticated REST API." },
+      { text: "PASETO v4 tokens with Ethereum wallet challenge-response." },
+      { text: "libp2p Peer ID mutual authentication with a per-environment allowlist — for agents, not users." },
     ],
   },
   {
@@ -98,14 +94,12 @@ const layers: Layer[] = [
     where: "app",
     rejects: "Out-of-scope actions",
     items: [
-      { text: "Role-based access control.", project: "Intellixente · X-Factor" },
+      { text: "Role-based access control." },
       {
         text: "Stateless JWT design embedding company scopes, for multi-tenant isolation without session state.",
-        project: "Intellixente · X-Factor",
       },
       {
         text: "Protected superadmin tier: admins cannot modify the superadmin across all 7 user-management actions.",
-        project: "Atlas",
       },
     ],
   },
@@ -117,7 +111,6 @@ const layers: Layer[] = [
     items: [
       {
         text: "Role isolation across production, development and test; scoped grants without DELETE/TRUNCATE for human users; default privileges; Row Level Security policies.",
-        project: "Netsepio",
       },
     ],
   },
@@ -127,9 +120,9 @@ const layers: Layer[] = [
     where: "ops",
     rejects: "Dirty builds",
     items: [
-      { text: "Uptime, memory and disk alerting with Uptime Kuma push monitors and Teams notifications.", project: "Netsepio" },
-      { text: "Release pipeline with a hard gate that blocks dirty builds from becoming release artifacts.", project: "Atlas" },
-      { text: "Diagnosed an outage caused by an ioredis/BullMQ connection leak (7,817 of 7,848 Valkey clients).", project: "Netsepio" },
+      { text: "Uptime, memory and disk alerting with Uptime Kuma push monitors and Teams notifications." },
+      { text: "Release pipeline with a hard gate that blocks dirty builds from becoming release artifacts." },
+      { text: "Diagnosed an outage caused by an ioredis/BullMQ connection leak (7,817 of 7,848 Valkey clients)." },
     ],
   },
 ];
@@ -289,7 +282,7 @@ export default function Security() {
 
       <Reveal className="mt-6 grid grid-cols-1 md:grid-cols-12 md:gap-8">
         <p className="max-w-[40rem] text-ink-2 text-pretty md:col-[4/span_9]">
-          These controls come from different projects, so no single request passes through all of them. Each one is
+          These controls come from different systems, so no single request passes through all of them. Each one is
           tagged with where it runs: the Cloudflare edge, a reverse proxy, the Go service, or PostgreSQL itself.
         </p>
       </Reveal>
@@ -327,17 +320,19 @@ export default function Security() {
               </div>
             </div>
             <div className="col-start-2 mt-4 md:col-span-9 md:col-start-auto md:mt-0">
-              <ul className="space-y-3">
+              <ul className="prose-list max-w-[52rem] space-y-3 text-ink-2">
                 {l.items.map((it) => (
-                  <li key={it.text} className="grid gap-1 sm:grid-cols-[minmax(0,1fr)_10rem] sm:gap-6">
-                    <span className="text-ink-2 text-pretty">{it.text}</span>
-                    <span className="meta text-mute sm:text-right">
-                      {it.source === "platform" ? "Cloudflare default · not from the CV" : it.project}
-                    </span>
+                  <li key={it.text} className="text-pretty">
+                    {it.text}
+                    {it.source === "platform" && (
+                      <span className="meta ml-2 rounded border border-rule px-1.5 py-px whitespace-nowrap text-mute">
+                        platform default
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
-              {l.note && <p className="meta mt-4 max-w-[44rem] border-l-2 border-red/40 pl-3 text-ink-2">{l.note}</p>}
+              {l.note && <p className="meta mt-4 max-w-[52rem] border-l-2 border-red/40 pl-3 text-ink-2">{l.note}</p>}
             </div>
           </Reveal>
         ))}
@@ -347,7 +342,7 @@ export default function Security() {
       <div className="mt-4 grid grid-cols-1 gap-10 border-t border-ink pt-8 md:grid-cols-2 md:gap-8">
         <Reveal>
           <h3 className="text-h4 font-medium">How a rate limit decides</h3>
-          <p className="meta mt-1 text-mute">Conceptual token-bucket model. The Netsepio limit is a Cloudflare per-IP rule, not this code.</p>
+          <p className="meta mt-1 text-mute">Conceptual token-bucket model. The production limit described above is a Cloudflare per-IP rule, not this code.</p>
           <div className="mt-4 space-y-4 rounded-lg border border-rule bg-[#fbf9f5] p-4 sm:p-5">
             <TokenBucket />
             <Code label="Token bucket pseudocode">
