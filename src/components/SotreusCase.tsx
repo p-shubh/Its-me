@@ -39,12 +39,12 @@ const nodes: Record<NodeId, { title: string; sub: string; e: Evidence; status: s
   clients: { title: "VPN clients", sub: "phones · laptops", e: "documented", status: "Documented" },
   tunnel: {
     title: "WireGuard tunnel endpoint",
-    sub: "Likely in public docs",
+    sub: "kernel interface via wgctrl",
     e: "cv",
-    status: "Confirmed by CV",
+    status: "Implemented",
   },
   dns: { title: "DNS firewall", sub: "AdGuard or Pi-hole", e: "documented", status: "Documented" },
-  nat: { title: "NAT", sub: "iptables", e: "cv", status: "Confirmed by CV" },
+  nat: { title: "NAT", sub: "iptables", e: "cv", status: "Implemented" },
   internet: { title: "Internet egress", sub: "public internet", e: "likely", status: "Likely" },
 };
 
@@ -116,7 +116,7 @@ function Diagram({ vb, boxes, edges, title }: { vb: string; boxes: Record<NodeId
 }
 
 const TITLE =
-  "Sotreus architecture: an admin adds clients through the Sotreus Go API (REST, gRPC, /docs), which emails VPN configuration through an SMTP service to phones and laptops. Clients connect to a WireGuard tunnel endpoint (confirmed by CV, likely in public docs); DNS goes through an AdGuard or Pi-hole firewall and traffic leaves through iptables NAT to the internet.";
+  "Sotreus architecture: an admin adds clients through the Sotreus Go API (REST, gRPC, /docs), which emails VPN configuration through an SMTP service to phones and laptops. Clients connect to a WireGuard tunnel endpoint; DNS goes through an AdGuard or Pi-hole firewall and traffic leaves through iptables NAT to the internet.";
 
 // desktop: two rows, control plane on top, data path below
 const wide = {
@@ -188,7 +188,7 @@ export default function SotreusCase({ head }: { head: React.ReactNode }) {
       <Reveal className="mt-14">
         <Figure
           no="4"
-          caption="Sotreus components and connections. Line and border style follow the evidence legend; heavier borders mark parts confirmed by the CV."
+          caption="Sotreus components and connections. Dashed lines mark inferred connections; heavier borders mark the parts I implemented."
         >
           <div className="border border-rule bg-paper p-4 sm:p-8">
             <div className="hidden lg:block">
@@ -217,7 +217,6 @@ export default function SotreusCase({ head }: { head: React.ReactNode }) {
         <Reveal delay={0.05} className="md:col-span-6 lg:col-[7/span_6]">
           <h4 className="flex items-baseline justify-between gap-4 border-b border-rule pb-2 text-h4 font-medium">
             My contribution
-            <EvidenceTag e="cv" />
           </h4>
           <p className="meta mt-3 text-mute">
             {sotreusCase.org} · {sotreusCase.period} — {cv.tagline}

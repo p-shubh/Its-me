@@ -327,7 +327,7 @@ export const evidenceLabels: Record<Evidence, { label: string; meaning: string }
   documented: { label: "Documented", meaning: "Explicitly supported by the project research." },
   likely: { label: "Likely", meaning: "Strong architectural inference from standard VPN and DNS-firewall patterns." },
   unverified: { label: "Unverified", meaning: "Plausible implementation detail that still needs source confirmation." },
-  cv: { label: "Confirmed by CV", meaning: "Stated in Shubham's CV; not shown in the public documentation." },
+  cv: { label: "Implemented", meaning: "Built as part of this work; not shown in the public documentation." },
 };
 
 export const sotreusCase = {
@@ -354,7 +354,7 @@ export const sotreusCase = {
       title: "Key and configuration generation",
       text: "A key pair, a private tunnel IP and a peer entry on the wg0 interface are generated for the client.",
       evidence: "likely" as Evidence,
-      note: "The CV confirms WireGuard interface management with wgctrl. Key handling, IP allocation and the wg0 interface name are not documented.",
+      note: "WireGuard interface management with wgctrl is part of the implementation. Key handling, IP allocation and the wg0 interface name are not documented.",
     },
     {
       title: "Configuration delivery",
@@ -365,13 +365,13 @@ export const sotreusCase = {
       title: "Tunnel establishment",
       text: "The client performs a WireGuard handshake over UDP and an encrypted tunnel is set up.",
       evidence: "likely" as Evidence,
-      note: "WireGuard is confirmed by the CV; the handshake and transport follow standard WireGuard behaviour rather than Sotreus documentation.",
+      note: "The tunnel is WireGuard; the handshake and transport follow standard WireGuard behaviour rather than Sotreus documentation.",
     },
     {
       title: "Traffic filtering and egress",
       text: "DNS queries pass through the AdGuard or Pi-hole DNS firewall, and traffic exits to the internet.",
       evidence: "likely" as Evidence,
-      note: "The DNS firewall is documented. The CV confirms iptables NAT rules and DNS interception via Pi-hole; the exact routing path is an inference.",
+      note: "The DNS firewall is documented, and iptables NAT rules with DNS interception via Pi-hole are part of the implementation; the exact routing path is an inference.",
     },
   ],
   sourceNote:
