@@ -28,21 +28,6 @@ function EvidenceTag({ e, className = "" }: { e: Evidence; className?: string })
   return <span className={`${base} ${style[e]} ${className}`}>{evidenceLabels[e].label}</span>;
 }
 
-function Legend() {
-  return (
-    <dl className="meta grid grid-cols-1 gap-x-8 gap-y-2 text-mute sm:grid-cols-2">
-      {(Object.keys(evidenceLabels) as Evidence[]).map((e) => (
-        <div key={e} className="flex items-baseline gap-3">
-          <dt className="shrink-0">
-            <EvidenceTag e={e} />
-          </dt>
-          <dd>{evidenceLabels[e].meaning}</dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
-
 /* ── architecture diagram ─────────────────────────────────────────────── */
 
 type NodeId = "admin" | "api" | "email" | "clients" | "tunnel" | "dns" | "nat" | "internet";
@@ -198,14 +183,6 @@ export default function SotreusCase({ head }: { head: React.ReactNode }) {
           <p className="meta mt-4 max-w-[40rem] text-mute">{sotreusCase.sourceNote}</p>
         </Reveal>
       </div>
-
-      {/* evidence legend */}
-      <Reveal className="mt-12 grid grid-cols-1 gap-4 border-t border-rule pt-5 md:grid-cols-12 md:gap-8">
-        <h4 className="meta font-medium md:col-span-3">How to read this case study</h4>
-        <div className="md:col-span-9">
-          <Legend />
-        </div>
-      </Reveal>
 
       {/* architecture */}
       <Reveal className="mt-14">
