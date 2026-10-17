@@ -65,10 +65,18 @@ export default function Cover() {
             />
           </svg>
 
-          <motion.p {...fade(0.2)} className="mt-7 max-w-[34ch] text-lede text-pretty text-ink-2">
-            I build scalable backend systems with Go that stay reliable under concurrent, high-throughput load — gRPC and
-            REST APIs, event-driven pipelines and real-time infrastructure, owned from schema to production.
-          </motion.p>
+          <motion.div {...fade(0.2)} className="mt-7 max-w-[36ch]">
+            <p className="text-[clamp(1.5rem,1.2rem+1vw,2rem)] leading-none font-semibold tracking-[-0.03em] text-red">
+              0 <span className="text-mute">→</span> 1 <span className="text-mute">→</span> 10×
+            </p>
+            <p className="mt-3 text-lede font-medium text-pretty">
+              Engineering solutions. Solving hard problems. Scaling ideas.
+            </p>
+            <p className="mt-3 text-ink-2 text-pretty">
+              I turn complex problems into reliable, scalable software — from first principles to production systems,
+              across technologies and domains.
+            </p>
+          </motion.div>
 
           <motion.div {...fade(0.3)} className="mt-8 flex flex-wrap gap-3">
             <a href="#work" className="btn btn-solid">
