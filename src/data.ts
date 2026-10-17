@@ -214,6 +214,23 @@ export const myriadflow = {
     "Built and maintained backend services for an NFT marketplace handling high-throughput event-driven workflows — async event pipelines for mint triggers, ownership transfers, and marketplace activity.",
     "Contributed to gRPC-based inter-service communication, microservices architecture design, and database optimization for scalable data retrieval under concurrent load.",
   ],
+  url: "https://myriadflow.com/",
+  // Public description of the platform, from myriadflow.com and its Devfolio listing
+  // (devfolio.co/projects/myriadflows-phygital-xperience-d455). Not a claim about Shubham's own work.
+  about:
+    "An AI-powered, no-code platform that lets brands and creators launch phygital NFTs — tokens tied to physical products for verified ownership and authenticity — along with immersive brand experiences, without writing code.",
+  pillars: [
+    { title: "No-Code Studio", text: "A launchpad where brands create phygital NFT collections and AI-powered experiences without code." },
+    { title: "Discover marketplace", text: "A marketplace that connects brands, creators and collectors around digital and physical collectibles." },
+    { title: "AI-powered WebXR", text: "Brand AI agents in immersive WebXR environments that customers can interact with." },
+  ],
+  phygital: [
+    { title: "Create", text: "A brand sets up a phygital collection in the Studio; lazy minting and Web2 logins keep the on-ramp simple." },
+    { title: "Link", text: "Each physical product carries an NFC tag that links it to its NFT, for asset tracking and verified ownership." },
+    { title: "Claim", text: "The owner scans the tag and opens the product's WebXR experience; fans can also claim free fan tokens." },
+  ],
+  publicStack: ["BASE", "Coinbase Smart Wallet", "IPFS", "Next.js", "NFC", "WebXR"],
+  events: ["Mint triggers", "Ownership transfers", "Marketplace activity"],
 };
 
 export const atlas = {

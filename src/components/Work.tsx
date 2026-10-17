@@ -231,10 +231,108 @@ export default function Work() {
 
       {/* ── Case 05 · MyriadFlow ─────────────────────────── */}
       <article id="myriadflow" className="wrap mt-28 sm:mt-40" aria-label={`${myriadflow.name} case study`}>
-        <CaseHead no="05" kind={myriadflow.kind} name={myriadflow.name} sub={myriadflow.subtitle} />
-        <Reveal className="mt-10 grid gap-8 grid-cols-1 md:grid-cols-12">
-          <div className="md:col-[4/span_9] lg:col-[4/span_6]">
-            <Points items={myriadflow.points} />
+        <CaseHead
+          no="05"
+          kind={myriadflow.kind}
+          name={myriadflow.name}
+          sub={myriadflow.subtitle}
+          note={
+            <a href={myriadflow.url} target="_blank" rel="noopener noreferrer" className="ulink meta text-ink-2">
+              myriadflow.com ↗<span className="sr-only"> (opens in new tab)</span>
+            </a>
+          }
+        />
+
+        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12">
+          <Reveal className="md:col-[4/span_9] lg:col-[4/span_7]">
+            <p className="text-lede text-pretty">{myriadflow.about}</p>
+          </Reveal>
+        </div>
+
+        {/* the platform — public description */}
+        <Reveal className="mt-14 grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-3">
+            <h4 className="text-h4 font-medium">The platform</h4>
+            <p className="meta mt-1 text-mute">From myriadflow.com and its public project listing</p>
+          </div>
+          <div className="md:col-span-9">
+            <ul className="grid grid-cols-1 border-t border-rule sm:grid-cols-3 sm:border-t-0">
+              {myriadflow.pillars.map((p, i) => (
+                <li key={p.title} className={`border-b border-rule py-4 sm:border-b-0 sm:py-0 ${i > 0 ? "sm:border-l sm:pl-6" : ""} ${i < 2 ? "sm:pr-6" : ""}`}>
+                  <p className="font-medium">{p.title}</p>
+                  <p className="mt-1.5 text-ink-2 text-pretty">{p.text}</p>
+                </li>
+              ))}
+            </ul>
+
+            <p className="meta mt-10 font-medium text-mute">How a phygital NFT works</p>
+            <ol className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {myriadflow.phygital.map((p, i) => (
+                <li key={p.title} className="relative rounded-lg border border-rule bg-[#fbf9f5] p-4">
+                  <span className="grid size-6 place-items-center rounded-full bg-red text-[0.75rem] font-semibold text-paper tabular-nums" aria-hidden>
+                    {i + 1}
+                  </span>
+                  <p className="mt-3 font-medium">
+                    <span className="sr-only">Step {i + 1}: </span>
+                    {p.title}
+                  </p>
+                  <p className="mt-1 text-ink-2 text-pretty">{p.text}</p>
+                  {i < 2 && (
+                    <span className="absolute top-1/2 -right-3 z-[1] hidden -translate-y-1/2 text-mute sm:block" aria-hidden>
+                      →
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ol>
+            <p className="meta mt-4 text-mute">
+              <span className="mr-2 font-medium text-ink">Platform stack</span>
+              {myriadflow.publicStack.join("  ·  ")}
+            </p>
+          </div>
+        </Reveal>
+
+        {/* my contribution — CV */}
+        <Reveal className="mt-14 grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
+          <div className="md:col-span-3">
+            <h4 className="text-h4 font-medium">My contribution</h4>
+            <p className="meta mt-1 text-mute">Backend services</p>
+          </div>
+          <div className="md:col-span-9">
+            {/* event-driven flow the backend handled */}
+            <div className="grid grid-cols-1 items-stretch gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]">
+              <div className="rounded-lg border border-rule bg-[#fbf9f5] p-4">
+                <p className="meta font-medium text-mute">Marketplace events</p>
+                <ul className="mt-2 space-y-1">
+                  {myriadflow.events.map((e) => (
+                    <li key={e} className="flex items-center gap-2">
+                      <span className="size-1.5 rounded-full bg-red" aria-hidden />
+                      {e}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <span className="self-center justify-self-center text-red md:rotate-0" aria-hidden>
+                <span className="md:hidden">↓</span>
+                <span className="hidden md:inline">→</span>
+              </span>
+              <div className="rounded-lg border border-red/40 bg-red/[0.04] p-4">
+                <p className="meta font-medium text-red">Async event pipelines</p>
+                <p className="mt-2 text-ink-2">Producers decoupled from consumers, built for high-throughput, bursty workloads.</p>
+              </div>
+              <span className="self-center justify-self-center text-red" aria-hidden>
+                <span className="md:hidden">↓</span>
+                <span className="hidden md:inline">→</span>
+              </span>
+              <div className="rounded-lg border border-rule bg-[#fbf9f5] p-4">
+                <p className="meta font-medium text-mute">Go microservices</p>
+                <p className="mt-2 text-ink-2">gRPC between services; PostgreSQL tuned for data retrieval under concurrent load.</p>
+              </div>
+            </div>
+
+            <div className="mt-8">
+              <Points items={myriadflow.points} />
+            </div>
             <div className="mt-8 border-t border-rule pt-5">
               <StackLine items={myriadflow.stack} />
             </div>
