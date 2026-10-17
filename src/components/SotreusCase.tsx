@@ -271,42 +271,6 @@ export default function SotreusCase({ head }: { head: React.ReactNode }) {
         </ol>
       </section>
 
-      {/* Sotreus vs Erebrus */}
-      <section className="mt-16" aria-labelledby="sotreus-vs">
-        <Reveal className="grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
-          <h4 id="sotreus-vs" className="text-h4 font-medium md:col-span-3">
-            Sotreus is not Erebrus
-          </h4>
-          <p className="text-ink-2 md:col-span-9">
-            Two different products. Sotreus does not inherit Erebrus&rsquo;s decentralized architecture, node network or
-            routing model.
-          </p>
-        </Reveal>
-        <Reveal className="mt-8 grid grid-cols-1 border-t border-rule md:grid-cols-2">
-          <div className="border-b border-rule py-6 md:border-b-0 md:pr-8">
-            <p className="flex items-baseline justify-between gap-4">
-              <span className="font-medium">Sotreus</span>
-              <span className="meta text-mute">private, operator-managed VPN</span>
-            </p>
-            <ul className="prose-list mt-4 space-y-3 text-ink-2">
-              {sotreusCase.comparison.sotreus.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="py-6 md:border-l md:border-rule md:pl-8">
-            <p className="flex items-baseline justify-between gap-4">
-              <span className="font-medium">Erebrus</span>
-              <span className="meta text-mute">decentralized VPN · NetSepio</span>
-            </p>
-            <ul className="prose-list mt-4 space-y-3 text-ink-2">
-              {sotreusCase.comparison.erebrus.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
-      </section>
     </article>
   );
 }

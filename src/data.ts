@@ -374,20 +374,6 @@ export const sotreusCase = {
       note: "The DNS firewall is documented. The CV confirms iptables NAT rules and DNS interception via Pi-hole; the exact routing path is an inference.",
     },
   ],
-  comparison: {
-    sotreus: [
-      "Self-hosted, dedicated VPN building block.",
-      "One deployment is controlled by a single operator.",
-      "The operator controls deployment configuration, keys, logs and egress IP.",
-      "Best described as a private, operator-managed VPN deployment.",
-      "VPN-era documentation may be retired; the current product name should be confirmed with the team.",
-    ],
-    erebrus: [
-      "Decentralized VPN project within the NetSepio ecosystem.",
-      "WireGuard-based, with peer-to-peer routing across a network of nodes.",
-      "Hermes Index is described in the research as rating nodes for routing and rewards.",
-    ],
-  },
   sourceNote:
     "No repository is linked: the current NetSepio/sotreus repository is a newer Android situational-awareness application, not the VPN implementation described here.",
 };
