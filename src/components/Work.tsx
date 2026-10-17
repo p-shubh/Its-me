@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { atlas, myriadflow, netsepio, sotreusCase, trading } from "../data";
 import AtlasCase from "./AtlasCase";
-import { NetsepioFigure, TradingFigure } from "./Figures";
+import { NetsepioFigure } from "./Figures";
+import TradingDiagram, { tradingSteps } from "./TradingDiagram";
 import Character from "./Character";
 import SotreusCase from "./SotreusCase";
 import { Figure, Reveal, SectionHead, StackLine } from "./ui";
@@ -171,20 +172,44 @@ export default function Work() {
       {/* ── Case 03 · Trading calculator ─────────────────── */}
       <article id="trading" className="wrap mt-28 sm:mt-40" aria-label={`${trading.name} case study`}>
         <CaseHead no="03" kind={trading.kind} name={trading.name} sub={trading.subtitle} />
-        <div className="mt-12 grid gap-12 grid-cols-1 md:grid-cols-12 md:gap-8">
-          <Reveal className="md:col-span-7">
-            <Figure no="3" caption={`${trading.tagline}: signals stream in, position P&L is computed per client, updates fan out to concurrent subscribers.`}>
-              <div className="border border-rule p-5 sm:p-8">
-                <TradingFigure />
-              </div>
-            </Figure>
-          </Reveal>
-          <Reveal delay={0.06} className="md:col-span-5 lg:col-[9/span_4]">
+
+        <Reveal className="mt-12">
+          <Figure
+            no="3"
+            caption={`${trading.tagline}. Numbers follow the steps below; terracotta marks the live data path, grey the reconnect path.`}
+          >
+            <div className="border border-rule bg-paper px-2 py-4 sm:p-8 lg:p-10">
+              <TradingDiagram />
+            </div>
+          </Figure>
+        </Reveal>
+
+        <Reveal className="mt-10">
+          <ol className="grid grid-cols-1 gap-x-8 border-t border-rule sm:grid-cols-2 lg:grid-cols-3">
+            {tradingSteps.map((st, i) => (
+              <li key={st.title} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-2 border-b border-rule py-4">
+                <span className="grid size-6 place-items-center rounded-full bg-red text-[0.75rem] font-semibold text-paper tabular-nums" aria-hidden>
+                  {i + 1}
+                </span>
+                <div>
+                  <p className="font-medium">
+                    <span className="sr-only">Step {i + 1}: </span>
+                    {st.title}
+                  </p>
+                  <p className="mt-1 text-ink-2 text-pretty">{st.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
+          <Reveal className="md:col-span-4">
             <p className="display text-stat">Sub-millisecond</p>
             <p className="mt-2 text-ink-2">broadcast latency to multiple concurrent clients</p>
-            <div className="mt-8">
-              <Points items={trading.points} />
-            </div>
+          </Reveal>
+          <Reveal delay={0.06} className="md:col-span-8">
+            <Points items={trading.points} />
             <div className="mt-8 border-t border-rule pt-5">
               <StackLine items={trading.stack} />
             </div>

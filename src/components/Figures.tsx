@@ -113,30 +113,3 @@ export function NetsepioFigure() {
     </Svg>
   );
 }
-
-/** Fig. 4 — trading calculator: signals in, P&L computed, broadcast out. */
-export function TradingFigure() {
-  return (
-    <Svg
-      vb="0 0 420 220"
-      label="Market signals stream into a Go WebSocket server that computes position P and L, tracks per-client sessions and broadcasts to four concurrent clients"
-    >
-      {(m) => (
-        <>
-          <Box x={0} y={78} w={104} h={56} lines={["market", "signals"]} />
-          <path {...line} className="flow" d="M104 106 L148 106" markerEnd={m} />
-          <Box x={150} y={56} w={124} h={100} lines={["WebSocket", "server", "P&L · sessions"]} accent={INK} />
-          {[8, 62, 116, 170].map((y) => (
-            <g key={y}>
-              <path {...line} className="flow" d={`M274 106 C 300 106, 300 ${y + 18}, 326 ${y + 18}`} markerEnd={m} />
-              <Box x={328} y={y} w={92} h={36} lines={["client"]} size={13} />
-            </g>
-          ))}
-          <text x={212} y={180} textAnchor="middle" fontSize={12} fill="currentColor" opacity={0.8}>
-            sub-ms broadcast
-          </text>
-        </>
-      )}
-    </Svg>
-  );
-}
