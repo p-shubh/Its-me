@@ -14,7 +14,7 @@ const index = [
   { id: "trading", name: trading.name, kind: trading.kind, line: "Live signal streaming and P&L over WebSocket" },
   { id: "sotreus", name: "Sotreus", kind: "Lazarus Network", line: "Self-hosted, operator-managed VPN infrastructure" },
   { id: "myriadflow", name: myriadflow.name, kind: myriadflow.kind, line: "Event-driven NFT marketplace backend" },
-  { id: "docsai", name: docsai.name, kind: "Personal Project", line: "Chat with your documents — Go, Python and Next.js" },
+  { id: "docsai", name: docsai.name, kind: "Personal Project", line: "RAG application — Go, Python and Next.js" },
 ];
 
 function CaseHead({

@@ -459,8 +459,8 @@ export const atlasOverview = {
 // implements is claimed; scaffolded parts (most file loaders, OCR, OpenAI) are listed as next.
 export const docsai = {
   name: "DocsAI",
-  subtitle: "Chat with your documents (RAG)",
-  kind: "Personal Project · active development",
+  subtitle: "A RAG application for chatting with your documents",
+  kind: "Personal Project · in active development",
   repo: "https://github.com/p-shubh/DocsAi",
   intro:
     "Upload documents, then ask questions in plain language and get answers grounded in those documents — streamed as they are written, with the source chunks cited. A Go backend coordinates the work, a Python service does the AI, and a Next.js app is the interface.",
