@@ -121,9 +121,12 @@ const layers: Layer[] = [
     rejects: "Dirty builds",
     items: [
       { text: "Uptime, memory and disk alerting with Uptime Kuma push monitors and Teams notifications." },
+      { text: "Server hardening — SSH keys and config, Fail2ban, UFW, a CVE mitigation — paired with a verifier that checks the result." },
+      { text: "Central Prometheus, Grafana and Alertmanager monitoring of prod, staging and dev servers, alerting to Teams." },
       { text: "Release pipeline with a hard gate that blocks dirty builds from becoming release artifacts." },
       { text: "Diagnosed an outage caused by an ioredis/BullMQ connection leak (7,817 of 7,848 Valkey clients)." },
     ],
+    note: "The hardening and monitoring scripts are described under Infrastructure toolkit, at the end of Work.",
   },
 ];
 

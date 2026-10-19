@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { atlas, docsai, myriadflow, netsepio, sotreusCase, trading } from "../data";
 import AtlasCase from "./AtlasCase";
 import DocsAiCase from "./DocsAiCase";
+import Toolkit from "./Toolkit";
 import { NetsepioFigure } from "./Figures";
 import TradingDiagram, { tradingSteps } from "./TradingDiagram";
 import Character from "./Character";
@@ -358,6 +359,8 @@ export default function Work() {
           />
         }
       />
+
+      <Toolkit />
     </section>
   );
 }
