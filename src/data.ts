@@ -21,7 +21,7 @@ export const profile = {
 export type SkillGroup = { label: string; items: string[]; note?: string };
 
 export const skills: SkillGroup[] = [
-  { label: "Languages", items: ["Golang (primary)", "SQL", "Bash"] },
+  { label: "Languages", items: ["Golang (primary)", "Python", "TypeScript", "SQL", "Bash"] },
   { label: "APIs & Protocols", items: ["REST", "gRPC (Protocol Buffers)", "WebSocket", "HTTP/2"] },
   {
     label: "Distributed Systems",
@@ -60,6 +60,11 @@ export const skills: SkillGroup[] = [
     note: "Provisioning & server management",
   },
   { label: "Networking", items: ["WireGuard", "iptables NAT", "DNS (PiHole)", "wgctrl", "TCP/IP", "SSH"] },
+  {
+    label: "AI & retrieval",
+    items: ["RAG", "embeddings", "pgvector similarity search", "Gemini", "Ollama", "streaming answers (SSE)"],
+  },
+  { label: "Frontend", items: ["Next.js", "React", "Tailwind CSS"] },
   { label: "Tools", items: ["Postman", "Git", "Jira", "Notion", "Slack", "Discord"] },
 ];
 
@@ -447,4 +452,45 @@ export const atlasOverview = {
     "Zombie processes",
   ],
   roles: ["viewer", "operator", "admin", "superadmin"],
+};
+
+// ── DocsAI ────────────────────────────────────────────────────────────────────
+// From the public repository github.com/p-shubh/DocsAi (read 2026-10-19). Only what the code
+// implements is claimed; scaffolded parts (most file loaders, OCR, OpenAI) are listed as next.
+export const docsai = {
+  name: "DocsAI",
+  subtitle: "Chat with your documents (RAG)",
+  kind: "Personal Project · active development",
+  repo: "https://github.com/p-shubh/DocsAi",
+  intro:
+    "Upload documents, then ask questions in plain language and get answers grounded in those documents — streamed as they are written, with the source chunks cited. A Go backend coordinates the work, a Python service does the AI, and a Next.js app is the interface.",
+  ingest: [
+    { title: "Upload", text: "The Next.js app sends the file to the Go API (Gin). The file goes to MinIO; its metadata goes to PostgreSQL." },
+    { title: "Hand off", text: "The API answers straight away. A background goroutine calls ProcessDocument over gRPC with the bucket and object key — not the file itself." },
+    { title: "Chunk", text: "The Python service downloads the file from MinIO, extracts the text and splits it into chunks of about 1,000 characters." },
+    { title: "Embed", text: "Each chunk is embedded with Gemini or a local Ollama model, chosen by configuration." },
+    { title: "Save", text: "The service calls back over gRPC (SaveProcessingResult); Go stores the chunks and their 1024-dimension vectors in pgvector and marks the document completed." },
+  ],
+  ask: [
+    { title: "Embed the question", text: "Go asks the AI service for the question's embedding (EmbedQuery, gRPC)." },
+    { title: "Retrieve", text: "A pgvector cosine-distance search returns the 5 closest chunks, across all documents or within one." },
+    { title: "Cite", text: "Those chunks become source citations — document, page, section — sent to the browser first." },
+    { title: "Generate", text: "GenerateAnswerStream asks the LLM (Gemini 2.5 Flash or Ollama) to answer from that context, streaming over gRPC." },
+    { title: "Stream", text: "Go relays each piece to the browser as Server-Sent Events; the chat renders the answer as it arrives." },
+  ],
+  built: [
+    "Document API: upload, list, rename, delete, view chunks, download the original",
+    "Async processing with status tracking: uploaded → processing → completed / failed",
+    "Typed gRPC contract between Go and Python, including a server-streaming RPC",
+    "Provider abstraction for chat and embeddings: Gemini and Ollama",
+    "pgvector similarity search with source citations",
+    "Streaming chat UI in Next.js 16 / React 19",
+    "Docker Compose stack: PostgreSQL 17 + pgvector, Redis, MinIO",
+  ],
+  next: [
+    "Text extraction for PDF, Word, PowerPoint, CSV and images (OCR) — Excel works today",
+    "Smarter chunking, hybrid search and re-ranking",
+    "Authentication, workspaces and role-based access",
+  ],
+  stack: ["Golang", "Gin", "GORM", "Python", "gRPC", "Next.js", "TypeScript", "PostgreSQL + pgvector", "MinIO", "Redis", "Gemini", "Ollama", "Docker Compose"],
 };

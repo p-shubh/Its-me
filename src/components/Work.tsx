@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
-import { atlas, myriadflow, netsepio, sotreusCase, trading } from "../data";
+import { atlas, docsai, myriadflow, netsepio, sotreusCase, trading } from "../data";
 import AtlasCase from "./AtlasCase";
+import DocsAiCase from "./DocsAiCase";
 import { NetsepioFigure } from "./Figures";
 import TradingDiagram, { tradingSteps } from "./TradingDiagram";
 import Character from "./Character";
@@ -13,6 +14,7 @@ const index = [
   { id: "trading", name: trading.name, kind: trading.kind, line: "Live signal streaming and P&L over WebSocket" },
   { id: "sotreus", name: "Sotreus", kind: "Lazarus Network", line: "Self-hosted, operator-managed VPN infrastructure" },
   { id: "myriadflow", name: myriadflow.name, kind: myriadflow.kind, line: "Event-driven NFT marketplace backend" },
+  { id: "docsai", name: docsai.name, kind: "Personal Project", line: "Chat with your documents — Go, Python and Next.js" },
 ];
 
 function CaseHead({
@@ -70,7 +72,7 @@ export default function Work() {
           label="Selected work"
           title={
             <>
-              Five pieces of work, read closely.
+              Six pieces of work, read closely.
             </>
           }
         />
@@ -339,6 +341,23 @@ export default function Work() {
           </div>
         </Reveal>
       </article>
+
+      {/* ── Case 06 · DocsAI ─────────────────────────────── */}
+      <DocsAiCase
+        head={
+          <CaseHead
+            no="06"
+            kind={docsai.kind}
+            name={docsai.name}
+            sub={docsai.subtitle}
+            note={
+              <a href={docsai.repo} target="_blank" rel="noopener noreferrer" className="ulink meta text-ink-2">
+                github.com/p-shubh/DocsAi ↗<span className="sr-only"> (opens in new tab)</span>
+              </a>
+            }
+          />
+        }
+      />
     </section>
   );
 }
