@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import { atlas, docsai, myriadflow, netsepio, sotreusCase, trading } from "../data";
-import AtlasCase from "./AtlasCase";
-import DocsAiCase from "./DocsAiCase";
+import AtlasCaseView from "./AtlasCase";
+import DocsAiCaseView from "./DocsAiCase";
 import Toolkit from "./Toolkit";
 import { NetsepioFigure } from "./Figures";
 import TradingDiagram, { tradingSteps } from "./TradingDiagram";
 import Character from "./Character";
-import SotreusCase from "./SotreusCase";
+import SotreusCaseView from "./SotreusCase";
 import { Figure, Reveal, SectionHead, StackLine } from "./ui";
 
 const index = [
@@ -99,268 +99,311 @@ export default function Work() {
         </div>
       </div>
 
-      {/* ── Case 01 · Netsepio ─────────────────────────────── */}
-      <article id="netsepio" className="wrap mt-28 sm:mt-40" aria-label={`${netsepio.name} case study`}>
-        <CaseHead no="01" kind={`${netsepio.kind} · DePIN`} name={netsepio.name} sub={netsepio.subtitle} />
-
-        <div className="mt-12 grid gap-12 grid-cols-1 md:grid-cols-12 md:gap-8">
-          <Reveal className="md:col-span-7 lg:col-[4/span_5]">
-            <Label>The contribution</Label>
-            <Points items={netsepio.intro} />
-          </Reveal>
-
-          <Reveal delay={0.08} className="md:col-span-5 lg:col-span-4">
-            <div className="border-t-2 border-ink bg-paper-2 p-6 sm:p-8">
-              <p className="display text-stat tabular-nums">1.01M</p>
-              <p className="mt-4 text-lede font-medium">
-                requests per day of abnormal traffic — 72% of it from a single scraper IP.
-              </p>
-              <p className="mt-6 border-t border-rule pt-4 text-ink-2">
-                Answered with per-IP API rate limiting inside Cloudflare Free-plan limits, validated by load testing.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 grid gap-14 grid-cols-1 md:grid-cols-12 md:gap-8 lg:mt-24">
-          <Reveal className="md:col-span-5">
-            <div className="md:sticky md:top-24">
-              <Figure
-                no="1"
-                caption="The NetSepio ecosystem platform as operated: Cloudflare at the edge, a cron Worker feeding the WAF block list, and a Vultr origin."
-              >
-                <NetsepioFigure />
-              </Figure>
-            </div>
-          </Reveal>
-
-          <div className="md:col-span-7 lg:col-[7/span_6]">
-            <Label>In production — seven entries</Label>
-            <ol>
-              {netsepio.log.map((l, i) => (
-                <Reveal as="li" key={l.text} className="grid grid-cols-[2.5rem_1fr] gap-x-3 border-b border-rule py-6 first:pt-2">
-                  <span className="meta pt-0.5 font-medium text-red">{String(i + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h5 className="text-h4 font-medium">{l.title}</h5>
-                    <p className="mt-1.5 text-ink-2 text-pretty">{l.text}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </div>
-        <Reveal className="mt-10 border-t border-rule pt-5 lg:ml-[calc(25%+0.5rem)]">
-          <StackLine items={netsepio.stack} />
-        </Reveal>
-      </article>
-
-      {/* ── Case 02 · Atlas — architecture-first case study ── */}
-      <AtlasCase
-        head={
-          <CaseHead
-            no="02"
-            kind={atlas.kind}
-            name={atlas.name}
-            sub={atlas.subtitle}
-            note={
-              <p className="meta inline-flex items-center gap-2.5 text-mute">
-                <span className="size-1.5 shrink-0 rounded-full bg-red" aria-hidden />
-                {atlas.note}
-              </p>
-            }
-          />
-        }
-      />
-
-      {/* ── Case 03 · Trading calculator ─────────────────── */}
-      <article id="trading" className="wrap mt-28 sm:mt-40" aria-label={`${trading.name} case study`}>
-        <CaseHead no="03" kind={trading.kind} name={trading.name} sub={trading.subtitle} />
-
-        <Reveal className="mt-12">
-          <Figure
-            no="3"
-            caption={`${trading.tagline}. Numbers follow the steps below; terracotta marks the live data path, grey the reconnect path.`}
-          >
-            <div className="border border-rule bg-paper px-2 py-4 sm:p-8 lg:p-10">
-              <TradingDiagram />
-            </div>
-          </Figure>
-        </Reveal>
-
-        <Reveal className="mt-10">
-          <ol className="grid grid-cols-1 gap-x-8 border-t border-rule sm:grid-cols-2 lg:grid-cols-3">
-            {tradingSteps.map((st, i) => (
-              <li key={st.title} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-2 border-b border-rule py-4">
-                <span className="grid size-6 place-items-center rounded-full bg-red text-[0.75rem] font-semibold text-paper tabular-nums" aria-hidden>
-                  {i + 1}
-                </span>
-                <div>
-                  <p className="font-medium">
-                    <span className="sr-only">Step {i + 1}: </span>
-                    {st.title}
-                  </p>
-                  <p className="mt-1 text-ink-2 text-pretty">{st.text}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-
-        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
-          <Reveal className="md:col-span-4">
-            <p className="display text-stat">Sub-millisecond</p>
-            <p className="mt-2 text-ink-2">broadcast latency to multiple concurrent clients</p>
-          </Reveal>
-          <Reveal delay={0.06} className="md:col-span-8">
-            <Points items={trading.points} />
-            <div className="mt-8 border-t border-rule pt-5">
-              <StackLine items={trading.stack} />
-            </div>
-          </Reveal>
-        </div>
-      </article>
-
-      {/* ── Case 04 · Sotreus — see SotreusCase for the evidence-labelled case study ── */}
-      <SotreusCase
-        head={
-          <CaseHead
-            no="04"
-            kind={`${sotreusCase.org} · ${sotreusCase.period}`}
-            name={sotreusCase.name}
-            sub={sotreusCase.subtitle}
-          />
-        }
-      />
-
-      {/* ── Case 05 · MyriadFlow ─────────────────────────── */}
-      <article id="myriadflow" className="wrap mt-28 sm:mt-40" aria-label={`${myriadflow.name} case study`}>
-        <CaseHead
-          no="05"
-          kind={myriadflow.kind}
-          name={myriadflow.name}
-          sub={myriadflow.subtitle}
-          note={
-            <a href={myriadflow.url} target="_blank" rel="noopener noreferrer" className="ulink meta text-ink-2">
-              myriadflow.com ↗<span className="sr-only"> (opens in new tab)</span>
-            </a>
-          }
-        />
-
-        <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12">
-          <Reveal className="md:col-[4/span_9] lg:col-[4/span_7]">
-            <p className="text-lede text-pretty">{myriadflow.about}</p>
-          </Reveal>
-        </div>
-
-        {/* the platform — public description */}
-        <Reveal className="mt-14 grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-3">
-            <h4 className="text-h4 font-medium">The platform</h4>
-            <p className="meta mt-1 text-mute">From myriadflow.com and its public project listing</p>
-          </div>
-          <div className="md:col-span-9">
-            <ul className="grid grid-cols-1 border-t border-rule sm:grid-cols-3 sm:border-t-0">
-              {myriadflow.pillars.map((p, i) => (
-                <li key={p.title} className={`border-b border-rule py-4 sm:border-b-0 sm:py-0 ${i > 0 ? "sm:border-l sm:pl-6" : ""} ${i < 2 ? "sm:pr-6" : ""}`}>
-                  <p className="font-medium">{p.title}</p>
-                  <p className="mt-1.5 text-ink-2 text-pretty">{p.text}</p>
-                </li>
-              ))}
-            </ul>
-
-            <p className="meta mt-10 font-medium text-mute">How a phygital NFT works</p>
-            <ol className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {myriadflow.phygital.map((p, i) => (
-                <li key={p.title} className="relative rounded-lg border border-rule bg-[#fbf9f5] p-4">
-                  <span className="grid size-6 place-items-center rounded-full bg-red text-[0.75rem] font-semibold text-paper tabular-nums" aria-hidden>
-                    {i + 1}
-                  </span>
-                  <p className="mt-3 font-medium">
-                    <span className="sr-only">Step {i + 1}: </span>
-                    {p.title}
-                  </p>
-                  <p className="mt-1 text-ink-2 text-pretty">{p.text}</p>
-                  {i < 2 && (
-                    <span className="absolute top-1/2 -right-3 z-[1] hidden -translate-y-1/2 text-mute sm:block" aria-hidden>
-                      →
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ol>
-            <p className="meta mt-4 text-mute">
-              <span className="mr-2 font-medium text-ink">Platform stack</span>
-              {myriadflow.publicStack.join("  ·  ")}
-            </p>
-          </div>
-        </Reveal>
-
-        {/* my contribution — CV */}
-        <Reveal className="mt-14 grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
-          <div className="md:col-span-3">
-            <h4 className="text-h4 font-medium">My contribution</h4>
-            <p className="meta mt-1 text-mute">Backend services</p>
-          </div>
-          <div className="md:col-span-9">
-            {/* event-driven flow the backend handled */}
-            <div className="grid grid-cols-1 items-stretch gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]">
-              <div className="rounded-lg border border-rule bg-[#fbf9f5] p-4">
-                <p className="meta font-medium text-mute">Marketplace events</p>
-                <ul className="mt-2 space-y-1">
-                  {myriadflow.events.map((e) => (
-                    <li key={e} className="flex items-center gap-2">
-                      <span className="size-1.5 rounded-full bg-red" aria-hidden />
-                      {e}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <span className="self-center justify-self-center text-red md:rotate-0" aria-hidden>
-                <span className="md:hidden">↓</span>
-                <span className="hidden md:inline">→</span>
-              </span>
-              <div className="rounded-lg border border-red/40 bg-red/[0.04] p-4">
-                <p className="meta font-medium text-red">Async event pipelines</p>
-                <p className="mt-2 text-ink-2">Producers decoupled from consumers, built for high-throughput, bursty workloads.</p>
-              </div>
-              <span className="self-center justify-self-center text-red" aria-hidden>
-                <span className="md:hidden">↓</span>
-                <span className="hidden md:inline">→</span>
-              </span>
-              <div className="rounded-lg border border-rule bg-[#fbf9f5] p-4">
-                <p className="meta font-medium text-mute">Go microservices</p>
-                <p className="mt-2 text-ink-2">gRPC between services; PostgreSQL tuned for data retrieval under concurrent load.</p>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <Points items={myriadflow.points} />
-            </div>
-            <div className="mt-8 border-t border-rule pt-5">
-              <StackLine items={myriadflow.stack} />
-            </div>
-          </div>
-        </Reveal>
-      </article>
-
-      {/* ── Case 06 · DocsAI ─────────────────────────────── */}
-      <DocsAiCase
-        head={
-          <CaseHead
-            no="06"
-            kind={docsai.kind}
-            name={docsai.name}
-            sub={docsai.subtitle}
-            note={
-              <a href={docsai.repo} target="_blank" rel="noopener noreferrer" className="ulink meta text-ink-2">
-                github.com/p-shubh/DocsAi ↗<span className="sr-only"> (opens in new tab)</span>
-              </a>
-            }
-          />
-        }
-      />
+      <NetsepioCase />
+      <AtlasCase />
+      <TradingCase />
+      <SotreusCase />
+      <MyriadFlowCase />
+      <DocsAiCase />
 
       <Toolkit />
     </section>
+  );
+}
+
+export function NetsepioCase() {
+  return (
+    <>
+        {/* ── Case 01 · Netsepio ─────────────────────────────── */}
+        <article id="netsepio" className="wrap mt-28 sm:mt-40" aria-label={`${netsepio.name} case study`}>
+          <CaseHead no="01" kind={`${netsepio.kind} · DePIN`} name={netsepio.name} sub={netsepio.subtitle} />
+
+          <div className="mt-12 grid gap-12 grid-cols-1 md:grid-cols-12 md:gap-8">
+            <Reveal className="md:col-span-7 lg:col-[4/span_5]">
+              <Label>The contribution</Label>
+              <Points items={netsepio.intro} />
+            </Reveal>
+
+            <Reveal delay={0.08} className="md:col-span-5 lg:col-span-4">
+              <div className="border-t-2 border-ink bg-paper-2 p-6 sm:p-8">
+                <p className="display text-stat tabular-nums">1.01M</p>
+                <p className="mt-4 text-lede font-medium">
+                  requests per day of abnormal traffic — 72% of it from a single scraper IP.
+                </p>
+                <p className="mt-6 border-t border-rule pt-4 text-ink-2">
+                  Answered with per-IP API rate limiting inside Cloudflare Free-plan limits, validated by load testing.
+                </p>
+              </div>
+            </Reveal>
+          </div>
+
+          <div className="mt-16 grid gap-14 grid-cols-1 md:grid-cols-12 md:gap-8 lg:mt-24">
+            <Reveal className="md:col-span-5">
+              <div className="md:sticky md:top-24">
+                <Figure
+                  no="1"
+                  caption="The NetSepio ecosystem platform as operated: Cloudflare at the edge, a cron Worker feeding the WAF block list, and a Vultr origin."
+                >
+                  <NetsepioFigure />
+                </Figure>
+              </div>
+            </Reveal>
+
+            <div className="md:col-span-7 lg:col-[7/span_6]">
+              <Label>In production — seven entries</Label>
+              <ol>
+                {netsepio.log.map((l, i) => (
+                  <Reveal as="li" key={l.text} className="grid grid-cols-[2.5rem_1fr] gap-x-3 border-b border-rule py-6 first:pt-2">
+                    <span className="meta pt-0.5 font-medium text-red">{String(i + 1).padStart(2, "0")}</span>
+                    <div>
+                      <h5 className="text-h4 font-medium">{l.title}</h5>
+                      <p className="mt-1.5 text-ink-2 text-pretty">{l.text}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </ol>
+            </div>
+          </div>
+          <Reveal className="mt-10 border-t border-rule pt-5 lg:ml-[calc(25%+0.5rem)]">
+            <StackLine items={netsepio.stack} />
+          </Reveal>
+        </article>
+    </>
+  );
+}
+
+export function AtlasCase() {
+  return (
+    <>
+        {/* ── Case 02 · Atlas — architecture-first case study ── */}
+        <AtlasCaseView
+          head={
+            <CaseHead
+              no="02"
+              kind={atlas.kind}
+              name={atlas.name}
+              sub={atlas.subtitle}
+              note={
+                <p className="meta inline-flex items-center gap-2.5 text-mute">
+                  <span className="size-1.5 shrink-0 rounded-full bg-red" aria-hidden />
+                  {atlas.note}
+                </p>
+              }
+            />
+          }
+        />
+    </>
+  );
+}
+
+export function TradingCase() {
+  return (
+    <>
+        {/* ── Case 03 · Trading calculator ─────────────────── */}
+        <article id="trading" className="wrap mt-28 sm:mt-40" aria-label={`${trading.name} case study`}>
+          <CaseHead no="03" kind={trading.kind} name={trading.name} sub={trading.subtitle} />
+
+          <Reveal className="mt-12">
+            <Figure
+              no="3"
+              caption={`${trading.tagline}. Numbers follow the steps below; terracotta marks the live data path, grey the reconnect path.`}
+            >
+              <div className="border border-rule bg-paper px-2 py-4 sm:p-8 lg:p-10">
+                <TradingDiagram />
+              </div>
+            </Figure>
+          </Reveal>
+
+          <Reveal className="mt-10">
+            <ol className="grid grid-cols-1 gap-x-8 border-t border-rule sm:grid-cols-2 lg:grid-cols-3">
+              {tradingSteps.map((st, i) => (
+                <li key={st.title} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-x-2 border-b border-rule py-4">
+                  <span className="grid size-6 place-items-center rounded-full bg-red text-[0.75rem] font-semibold text-paper tabular-nums" aria-hidden>
+                    {i + 1}
+                  </span>
+                  <div>
+                    <p className="font-medium">
+                      <span className="sr-only">Step {i + 1}: </span>
+                      {st.title}
+                    </p>
+                    <p className="mt-1 text-ink-2 text-pretty">{st.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+
+          <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
+            <Reveal className="md:col-span-4">
+              <p className="display text-stat">Sub-millisecond</p>
+              <p className="mt-2 text-ink-2">broadcast latency to multiple concurrent clients</p>
+            </Reveal>
+            <Reveal delay={0.06} className="md:col-span-8">
+              <Points items={trading.points} />
+              <div className="mt-8 border-t border-rule pt-5">
+                <StackLine items={trading.stack} />
+              </div>
+            </Reveal>
+          </div>
+        </article>
+    </>
+  );
+}
+
+export function SotreusCase() {
+  return (
+    <>
+        {/* ── Case 04 · Sotreus — see SotreusCase for the evidence-labelled case study ── */}
+        <SotreusCaseView
+          head={
+            <CaseHead
+              no="04"
+              kind={`${sotreusCase.org} · ${sotreusCase.period}`}
+              name={sotreusCase.name}
+              sub={sotreusCase.subtitle}
+            />
+          }
+        />
+    </>
+  );
+}
+
+export function MyriadFlowCase() {
+  return (
+    <>
+        {/* ── Case 05 · MyriadFlow ─────────────────────────── */}
+        <article id="myriadflow" className="wrap mt-28 sm:mt-40" aria-label={`${myriadflow.name} case study`}>
+          <CaseHead
+            no="05"
+            kind={myriadflow.kind}
+            name={myriadflow.name}
+            sub={myriadflow.subtitle}
+            note={
+              <a href={myriadflow.url} target="_blank" rel="noopener noreferrer" className="ulink meta text-ink-2">
+                myriadflow.com ↗<span className="sr-only"> (opens in new tab)</span>
+              </a>
+            }
+          />
+
+          <div className="mt-10 grid grid-cols-1 gap-8 md:grid-cols-12">
+            <Reveal className="md:col-[4/span_9] lg:col-[4/span_7]">
+              <p className="text-lede text-pretty">{myriadflow.about}</p>
+            </Reveal>
+          </div>
+
+          {/* the platform — public description */}
+          <Reveal className="mt-14 grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
+            <div className="md:col-span-3">
+              <h4 className="text-h4 font-medium">The platform</h4>
+              <p className="meta mt-1 text-mute">From myriadflow.com and its public project listing</p>
+            </div>
+            <div className="md:col-span-9">
+              <ul className="grid grid-cols-1 border-t border-rule sm:grid-cols-3 sm:border-t-0">
+                {myriadflow.pillars.map((p, i) => (
+                  <li key={p.title} className={`border-b border-rule py-4 sm:border-b-0 sm:py-0 ${i > 0 ? "sm:border-l sm:pl-6" : ""} ${i < 2 ? "sm:pr-6" : ""}`}>
+                    <p className="font-medium">{p.title}</p>
+                    <p className="mt-1.5 text-ink-2 text-pretty">{p.text}</p>
+                  </li>
+                ))}
+              </ul>
+
+              <p className="meta mt-10 font-medium text-mute">How a phygital NFT works</p>
+              <ol className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                {myriadflow.phygital.map((p, i) => (
+                  <li key={p.title} className="relative rounded-lg border border-rule bg-[#fbf9f5] p-4">
+                    <span className="grid size-6 place-items-center rounded-full bg-red text-[0.75rem] font-semibold text-paper tabular-nums" aria-hidden>
+                      {i + 1}
+                    </span>
+                    <p className="mt-3 font-medium">
+                      <span className="sr-only">Step {i + 1}: </span>
+                      {p.title}
+                    </p>
+                    <p className="mt-1 text-ink-2 text-pretty">{p.text}</p>
+                    {i < 2 && (
+                      <span className="absolute top-1/2 -right-3 z-[1] hidden -translate-y-1/2 text-mute sm:block" aria-hidden>
+                        →
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ol>
+              <p className="meta mt-4 text-mute">
+                <span className="mr-2 font-medium text-ink">Platform stack</span>
+                {myriadflow.publicStack.join("  ·  ")}
+              </p>
+            </div>
+          </Reveal>
+
+          {/* my contribution — CV */}
+          <Reveal className="mt-14 grid grid-cols-1 gap-4 border-t border-ink pt-5 md:grid-cols-12 md:gap-8">
+            <div className="md:col-span-3">
+              <h4 className="text-h4 font-medium">My contribution</h4>
+              <p className="meta mt-1 text-mute">Backend services</p>
+            </div>
+            <div className="md:col-span-9">
+              {/* event-driven flow the backend handled */}
+              <div className="grid grid-cols-1 items-stretch gap-3 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]">
+                <div className="rounded-lg border border-rule bg-[#fbf9f5] p-4">
+                  <p className="meta font-medium text-mute">Marketplace events</p>
+                  <ul className="mt-2 space-y-1">
+                    {myriadflow.events.map((e) => (
+                      <li key={e} className="flex items-center gap-2">
+                        <span className="size-1.5 rounded-full bg-red" aria-hidden />
+                        {e}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <span className="self-center justify-self-center text-red md:rotate-0" aria-hidden>
+                  <span className="md:hidden">↓</span>
+                  <span className="hidden md:inline">→</span>
+                </span>
+                <div className="rounded-lg border border-red/40 bg-red/[0.04] p-4">
+                  <p className="meta font-medium text-red">Async event pipelines</p>
+                  <p className="mt-2 text-ink-2">Producers decoupled from consumers, built for high-throughput, bursty workloads.</p>
+                </div>
+                <span className="self-center justify-self-center text-red" aria-hidden>
+                  <span className="md:hidden">↓</span>
+                  <span className="hidden md:inline">→</span>
+                </span>
+                <div className="rounded-lg border border-rule bg-[#fbf9f5] p-4">
+                  <p className="meta font-medium text-mute">Go microservices</p>
+                  <p className="mt-2 text-ink-2">gRPC between services; PostgreSQL tuned for data retrieval under concurrent load.</p>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <Points items={myriadflow.points} />
+              </div>
+              <div className="mt-8 border-t border-rule pt-5">
+                <StackLine items={myriadflow.stack} />
+              </div>
+            </div>
+          </Reveal>
+        </article>
+    </>
+  );
+}
+
+export function DocsAiCase() {
+  return (
+    <>
+        {/* ── Case 06 · DocsAI ─────────────────────────────── */}
+        <DocsAiCaseView
+          head={
+            <CaseHead
+              no="06"
+              kind={docsai.kind}
+              name={docsai.name}
+              sub={docsai.subtitle}
+              note={
+                <a href={docsai.repo} target="_blank" rel="noopener noreferrer" className="ulink meta text-ink-2">
+                  github.com/p-shubh/DocsAi ↗<span className="sr-only"> (opens in new tab)</span>
+                </a>
+              }
+            />
+          }
+        />
+    </>
   );
 }
