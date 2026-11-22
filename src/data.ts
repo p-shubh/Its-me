@@ -108,7 +108,7 @@ export const experience: Role[] = [
       "Engineered REST APIs for user authentication (JWT/PASETO), role-based access control, and Excel-based project plan ingestion with robust server-side validation.",
       "Designed and implemented an event-driven architecture for real-time task status propagation — async pub-sub pipelines decoupling producers from consumers, ensuring reliable delivery under concurrent load.",
       "Implemented superadmin dynamic company context switching — a stateless JWT design embedding company scopes, enabling seamless multi-tenant isolation without session state.",
-      "Managed Docker networking, container inspection, and server infrastructure on Vultr; configured SSL/TLS hardening (HSTS, redirect middleware) behind Cloudflare and Traefik.",
+      "Managed Docker networking, container inspection, and server infrastructure on AWS; configured SSL/TLS hardening (HSTS, redirect middleware) behind Cloudflare.",
       "Led Git branching strategy, PR reviews, and GitHub Actions CI/CD pipelines for automated testing and zero-downtime deployment.",
     ],
   },
